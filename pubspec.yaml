@@ -1,5 +1,5 @@
-name: trainer
-description: A new Flutter project.
+name: lala
+description: LaLa Trainers Launcher.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -31,10 +31,21 @@ dependencies:
   flutter:
     sdk: flutter
 
+  http: ^1.1.0
+  file: ^7.0.0
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  window_manager: ^0.3.6
+  cached_network_image: ^3.3.0
+  flutter_cache_manager: ^3.3.1
+  url_launcher: ^6.1.14
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+dependency_overrides:
+  flutter_cache_manager:
+    git:
+      url: https://github.com/wyyadd/flutter_cache_manager
+      ref: develop
+      path: flutter_cache_manager
 
 dev_dependencies:
   flutter_test:

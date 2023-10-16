@@ -1,0 +1,9 @@
+Package: lala-trainers-launcher
+Version: 1.0.0
+Section: x11
+Priority: optional
+Architecture: amd64
+Depends: libgtk-3-0, libblkid1, liblzma5
+Maintainer: LaLa Team
+Homepage: https://github.com/wyyadd/LaLa
+Description: LaLa Trainers Launcher

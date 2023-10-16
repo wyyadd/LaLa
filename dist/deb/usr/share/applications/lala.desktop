@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=LaLa Trainers Launcher
+Comment=LaLa Trainers Launcher
+Icon=LaLa
+Exec=LaLa
+Terminal=false
+Categories=Utility;Game;
