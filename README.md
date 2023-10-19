@@ -60,7 +60,7 @@ On Windows, the cache data is located in the ```%LOCALAPPDATA%/com.aironheart.la
 On Linux, it can be found in either ```$XDG_CACHE_HOME/com.aironheart.lala``` or ```~/.cache/com.aironheart.lala```.
 
 ### Why is it named LaLa Trainers Launcher?
-It's named after my love for the movie "La La Land." I hope you can enjoy using the software.💃🏽💃🏽💃🏽
+It's named after my love for the movie "La La Land." I hope you can enjoy using the software.💃🏽
 
 ## ☕ Support
 LaLa Trainers Launcher is an open source project that runs on donations.
