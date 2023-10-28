@@ -28,7 +28,7 @@
 
 ## ⚙️ Installation
 
-You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases)
+You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**百度网盘**](https://pan.baidu.com/s/1lMDy5VXMja4rVnD5E-9cFw?pwd=lala)
 
 For Linux user or Steam Deck user, run following commands to install.
 ```bash
