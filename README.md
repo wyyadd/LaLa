@@ -9,9 +9,11 @@
     <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
   </div>
-  A free and cross-platform trainers launcher for enhancing your gaming experience🤗.
+  A free and cross-platform trainers launcher for enhancing your gaming experience🤗.  
+  <br><br>
+  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a></span>
 </div>
-
+ 
 # 👀 Screenshots
 <div align="center">
   <img src="image/library.png" width=600 />
@@ -20,50 +22,45 @@
 </div>
 
 ## 💻 Supported platforms
-
 * Windows
 * Linux
 * Steam Deck
 * macOS (coming soon)
 
 ## ⚙️ Installation
-
-You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**百度网盘**](https://pan.baidu.com/s/1lMDy5VXMja4rVnD5E-9cFw?pwd=lala)
-
-For Linux user or Steam Deck user, run following commands to install.
-```bash
-sudo dpkg -i LaLa_linux_amd64.deb
-or
-sudo apt install ./LaLa_linux_amd64.deb
-or
-run LaLa_linux_amd64.AppImage directly🥰
-```
+You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**百度网盘**](https://pan.baidu.com/s/1CPvREbEhUd4XtGqgvw7R8Q?pwd=lala)
+- For Windows user, install **exe** file directly.
+- For Linux user, run following commands to install.
+    ```bash
+    sudo dpkg -i LaLa_linux_amd64.deb
+    or
+    sudo apt install ./LaLa_linux_amd64.deb
+    or
+    run LaLa_linux_amd64.AppImage directly🥰
+    ```
+- For Steam Deck User, run **LaLa_linux_amd64.AppImage** directly.
 
 ## ⚠️ Important notice for Linux user
 The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftware/Proton) to run trainers. To use trainers, you must:
-
 - Install Steam and set up Proton.
-
 - Have the game already installed.
 
 ## 🙋 FAQ
-
 ### During installation, my operating system warns about security.
 LaLa Trainers Launcher is an open-source software developed using Flutter. Any security warning you encounter during installation is a false positive from your system. You can safely proceed with the installation.
 
 ### Is the trainers downloaded by LaLa Trainers Launcher safe?
-Most of the trainers used by LaLa Trainers Launcher are sourced from [**Fling Trainers**](https://flingtrainer.com), and a few are from [**open-source cheat tables**](https://github.com/wyyadd/trainers) that I've collected. While every effort is made to ensure their safety, please use them **responsibly**, and be aware that the use of trainers can carry risks.
+Most of the trainers used by LaLa Trainers Launcher are sourced from [**Fling Trainers**](https://flingtrainer.com), and a few are from [**open-source cheat tables**](https://github.com/wyyadd/trainers) that I've collected.   
+While every effort is made to ensure their safety, please use them **responsibly**, and be aware that the use of trainers can carry risks.
 
 ### Where is LaLa Trainers Launcher's cache data stored?
-On Windows, the cache data is located in the ```%LOCALAPPDATA%/com.aironheart.lala``` directory.
-
+On Windows, the cache data is located in the ```%LOCALAPPDATA%/com.aironheart.lala``` directory.  
 On Linux, it can be found in either ```$XDG_CACHE_HOME/com.aironheart.lala``` or ```~/.cache/com.aironheart.lala```.
 
 ### Why is it named LaLa Trainers Launcher?
-It's named after my love for the movie "La La Land." I hope you can enjoy using the software.💃🏽
+It's named after my love for the movie "La La Land". I hope you can enjoy using the software.💃🏽
 
 ## ☕ Support
-LaLa Trainers Launcher is an open source project that runs on donations.
-
+LaLa Trainers Launcher is an open source project that runs on donations.  
 If you want to support me, you can [**buy me a coffee**](https://ko-fi.com/LaLaLauncher) or [**be my patreon**](https://www.patreon.com/LaLaLauncher).
 
