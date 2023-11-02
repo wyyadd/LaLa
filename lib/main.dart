@@ -76,6 +76,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         libraryGames.insert(0, game);
       });
     }
+    // save game library
+    localStorage.writeGameList(libraryGames, libraryFileName);
     if (switchTab) {
       tabController.animateTo(0);
     } else {
@@ -93,6 +95,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         Tab(text: getTranslatedText('Game', '游戏')),
       ];
     });
+    // save config
+    localStorage.writeConfig();
   }
 
   void updateBackButton() {

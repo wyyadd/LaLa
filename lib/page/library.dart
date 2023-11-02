@@ -45,6 +45,8 @@ class _LibraryPageState extends State<LibraryPage> {
                                   onTap: () async {
                                     widget.libraryGames!.remove(game);
                                     widget.libraryGames!.insert(0, game);
+                                    // save game library
+                                    localStorage.writeGameList(widget.libraryGames!, libraryFileName);
                                     widget.updateBackButton();
                                     await navLibraryKey.currentState!.push(
                                       CustomPageRoute(

@@ -10,7 +10,7 @@ class DetailPage extends StatefulWidget {
   final Game game;
   final bool? runTrainer;
 
-  const DetailPage({Key? key, required this.game, this.runTrainer}) : super(key: key);
+  const DetailPage({super.key, required this.game, this.runTrainer});
 
   @override
   State<DetailPage> createState() => _DetailPageState();

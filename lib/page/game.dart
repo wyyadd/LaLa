@@ -11,7 +11,7 @@ final GlobalKey<NavigatorState> navGameKey = GlobalKey<NavigatorState>();
 typedef UpdateLibraryFunction = void Function(Game game, bool switchTab);
 
 class GamePage extends StatefulWidget {
-  const GamePage({Key? key, this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator}) : super(key: key);
+  const GamePage({super.key, this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator});
 
   final List<Game>? searchedGames;
   final UpdateLibraryFunction updateLibraryGames;
