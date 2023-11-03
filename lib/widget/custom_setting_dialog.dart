@@ -135,7 +135,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "v1.0.1",
+                "v1.0.2",
                 style: TextStyle(color: Colors.grey),
               ),
               const SizedBox(width: 10),

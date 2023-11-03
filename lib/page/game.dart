@@ -94,7 +94,7 @@ class _GamePageState extends State<GamePage> {
                                     Container(
                                       width: 160,
                                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                      child: Text(game.name, textAlign: TextAlign.center),
+                                      child: Text(getTranslatedText(game.name, game.nameZh), textAlign: TextAlign.center),
                                     ),
                                   ],
                                 );

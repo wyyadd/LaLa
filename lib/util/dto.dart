@@ -24,6 +24,7 @@ class Trainer {
 
 class Game {
   String name;
+  String nameZh;
   int appId;
   String coverImageUrl;
   String? selectedVersion;
@@ -31,6 +32,7 @@ class Game {
 
   Game({
     required this.name,
+    required this.nameZh,
     required this.appId,
     required this.coverImageUrl,
     this.selectedVersion,
@@ -46,6 +48,7 @@ class Game {
 
     return Game(
       name: json['name'] as String,
+      nameZh: json['name_zh'] == null ? json['name'] : json['name_zh'] as String,
       appId: json['app_id'] as int,
       coverImageUrl: json['cover_image_url'] as String,
       selectedVersion: json['selected_version'] as String?,
@@ -61,6 +64,7 @@ class Game {
 
     return {
       'name': name,
+      'name_zh': nameZh,
       'app_id': appId,
       'cover_image_url': coverImageUrl,
       'selected_version': selectedVersion,

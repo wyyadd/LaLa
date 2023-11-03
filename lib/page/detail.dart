@@ -49,7 +49,7 @@ class _DetailPageState extends State<DetailPage> {
               width: 500,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Text(
-                widget.game.name,
+                getTranslatedText(widget.game.name, widget.game.nameZh),
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                 textAlign: TextAlign.center,
               ),

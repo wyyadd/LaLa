@@ -83,6 +83,8 @@ class _LibraryPageState extends State<LibraryPage> {
                                               setState(() {
                                                 widget.libraryGames!.remove(game);
                                               });
+                                              // save game library
+                                              localStorage.writeGameList(widget.libraryGames!, libraryFileName);
                                             },
                                           ),
                                         ),
@@ -113,7 +115,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                 Container(
                                   width: 220,
                                   padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                  child: Text(game.name, textAlign: TextAlign.center),
+                                  child: Text(getTranslatedText(game.name, game.nameZh), textAlign: TextAlign.center),
                                 ),
                               ],
                             );
