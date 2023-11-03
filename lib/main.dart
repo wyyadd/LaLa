@@ -44,12 +44,29 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     Tab(text: getTranslatedText('Game', '游戏')),
   ];
   bool showBackButton = false;
+  String latestVersion = "";
 
   LibraryPage libraryPage = LibraryPage(updateBackButton: () {});
   GamePage gamePage = GamePage(updateLibraryGames: (game, switchTab) {});
 
   List<Game> libraryGames = [];
   List<Game> hotListGames = [];
+
+  @override
+  void initState() {
+    super.initState();
+    windowManager.addListener(this);
+    windowManager.setPreventClose(true).then((value) => setState(() {}));
+    tabController = TabController(length: tabs.length, vsync: this);
+    _loadConfig();
+    _loadLocalGames();
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
 
   void updateSearchGames(String prompt) async {
     navGameKey.currentState?.popUntil((route) => route.isFirst);
@@ -105,16 +122,6 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     });
   }
 
-  @override
-  void initState() {
-    super.initState();
-    windowManager.addListener(this);
-    windowManager.setPreventClose(true).then((value) => setState(() {}));
-    tabController = TabController(length: tabs.length, vsync: this);
-    _loadConfig();
-    _loadLocalGames();
-  }
-
   void _loadConfig() async {
     Map<String, dynamic>? config = await localStorage.readConfig();
     if (config != null) {
@@ -123,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         updateLanguage(language);
       }
     }
+    latestVersion = await server.getLatestVersion();
   }
 
   void _loadLocalGames() async {
@@ -150,12 +158,6 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         localStorage.writeGameList(hotListGames, hotListFileName);
       }
     }
-  }
-
-  @override
-  void dispose() {
-    windowManager.removeListener(this);
-    super.dispose();
   }
 
   @override
@@ -239,7 +241,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                       showDialog(
                         context: context,
                         barrierDismissible: false,
-                        builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage),
+                        builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
                       );
                     },
                   ),

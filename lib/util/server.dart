@@ -8,6 +8,8 @@ final Server server = Server();
 class Server {
   static const String hotListApi = 'https://api.aironheart.com/hottest';
   static const String searchApi = 'https://api.aironheart.com/search';
+  static const String versionApi = 'https://api.aironheart.com/version';
+  static const String updateApi = 'https://api.aironheart.com/update';
 
   Future<List<Game>> getHotList() async {
     try {
@@ -38,6 +40,35 @@ class Server {
     } catch (e) {
       debugPrint(e.toString());
       return [];
+    }
+  }
+
+  Future<String> getLatestVersion() async {
+    try {
+      final response = await http.get(Uri.parse(versionApi));
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        return response.body;
+      } else {
+        return "";
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return "";
+    }
+  }
+
+  Future<Game?> getGameUpdate(String id) async {
+    try {
+      final response = await http.get(Uri.parse('$updateApi?id=$id'));
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        Game game = Game.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        return game;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
     }
   }
 }
