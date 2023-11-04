@@ -13,7 +13,13 @@
   <br><br>
   <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a></span>
 </div>
- 
+
+## ❤️ Thank You, Gaming Community
+After posting Reddit threads introducing LaLa, I received valuable feedback and input from many gamers. I want to express my gratitude to all of you.   
+Below is a list of to-do items based on the feedback I've received:
+- Work on making the launcher compatible with non-Steam games.
+- Improve warnings and safeguards for multiplayer games.
+
 # 👀 Screenshots
 <div align="center">
   <img src="image/library.png" width=600 />
