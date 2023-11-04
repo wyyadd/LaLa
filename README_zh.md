@@ -26,7 +26,7 @@
 * macOS (coming soon)
 
 ## ⚙️ 安装
-你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases) 或 [**百度网盘**](https://pan.baidu.com/s/1CPvREbEhUd4XtGqgvw7R8Q?pwd=lala)下载安装包
+你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases) 或 [**BiliBili**](https://www.bilibili.com/read/cv27455416)下载安装包
 - 对于Windows用户，直接安装**exe**文件
 - 对于Linux用户，运行以下命令安装
     ```bash

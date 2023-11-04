@@ -28,7 +28,7 @@
 * macOS (coming soon)
 
 ## ⚙️ Installation
-You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**百度网盘**](https://pan.baidu.com/s/1CPvREbEhUd4XtGqgvw7R8Q?pwd=lala)
+You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**BiliBili**](https://www.bilibili.com/read/cv27455416)
 - For Windows user, install **exe** file directly.
 - For Linux user, run following commands to install.
     ```bash
