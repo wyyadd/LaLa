@@ -1,8 +1,8 @@
 import 'detail.dart';
 import '../util/dto.dart';
+import '../util/language.dart';
 import '../util/storage.dart';
 import '../widget/custom_page_route.dart';
-import '../widget/custom_setting_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
+import '../util/language.dart';
 import 'package:flutter/material.dart';
-import 'custom_setting_dialog.dart';
 
 class CustomSearchBar extends StatefulWidget {
   final ValueChanged<String> updateSearchGames;

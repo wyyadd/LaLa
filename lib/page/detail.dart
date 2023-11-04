@@ -1,9 +1,9 @@
 import 'dart:io';
 import '../util/dto.dart';
 import '../util/game_launcher.dart';
+import '../util/language.dart';
 import '../util/server.dart';
 import '../util/storage.dart';
-import '../widget/custom_setting_dialog.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -31,10 +31,12 @@ class _DetailPageState extends State<DetailPage> {
       launchTrainer();
     }
     server.getGameUpdate('${widget.game.appId}:${widget.game.name}').then((g) {
-      if (g != null && (g.trainers.length != widget.game.trainers.length || g.trainers[0].trainerUrl != widget.game.trainers[0].trainerUrl)) {
-        setState(() {
-          widget.game.trainers = g.trainers;
-        });
+      if (g != null && mounted) {
+        if (g.trainers.length != widget.game.trainers.length || g.trainers[0].trainerUrl != widget.game.trainers[0].trainerUrl) {
+          setState(() {
+            widget.game.trainers = g.trainers;
+          });
+        }
       }
     });
   }

@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dto.dart';
 import 'dart:convert';
 import 'file_system.dart';
-import '../widget/custom_setting_dialog.dart';
+import 'language.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';

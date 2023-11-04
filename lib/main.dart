@@ -1,11 +1,12 @@
 import 'page/game.dart';
 import 'page/library.dart';
 import 'util/dto.dart';
+import 'util/language.dart';
 import 'util/server.dart';
 import 'util/storage.dart';
-import 'package:flutter/material.dart';
 import 'widget/custom_search_bar.dart';
 import 'widget/custom_setting_dialog.dart';
+import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() {

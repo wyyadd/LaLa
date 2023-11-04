@@ -1,14 +1,8 @@
+import '../util/language.dart';
+import '../util/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../util/storage.dart';
-
-String selectedLanguage = 'English';
-const List<String> languageOptions = ['English', '中文'];
-
-String getTranslatedText(String english, String chinese) {
-  return selectedLanguage == 'English' ? english : chinese;
-}
 
 class CustomSettingDialog extends StatefulWidget {
   const CustomSettingDialog({super.key, required this.updateLanguage, required this.latestVersion});

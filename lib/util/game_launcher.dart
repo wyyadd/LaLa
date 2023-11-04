@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'language.dart';
 import 'package:flutter/material.dart';
 
 Future<void> launchGame(String trainerPath, int appId, VoidCallback voidCallback) async {
@@ -48,6 +48,6 @@ Future<void> _validateDir(String path) async {
   var dir = Directory(path);
   bool exist = await dir.exists();
   if (!exist) {
-    throw Exception('$path not found');
+    throw Exception(getTranslatedText('$path not found\nMake sure Steam, Proton and Game all are installed', '未找到$path\n请确保Steam, Proton和游戏都已安装'));
   }
 }
