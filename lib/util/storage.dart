@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dto.dart';
 import 'dart:convert';
 import 'file_system.dart';
+import 'game_launcher.dart';
 import 'language.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -65,7 +66,7 @@ class LocalStorage {
   Future<void> writeConfig() async {
     final path = await localPath;
     final file = File('$path/$configFileName');
-    String config = jsonEncode({'language': selectedLanguage});
+    String config = jsonEncode({'language': selectedLanguage, 'custom_steam_path': customSteamPath});
     file.writeAsString(config);
   }
 

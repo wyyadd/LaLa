@@ -2,15 +2,32 @@ import 'dart:io';
 import 'language.dart';
 import 'package:flutter/material.dart';
 
+String customSteamPath = "";
+
 Future<void> launchGame(String trainerPath, int appId, VoidCallback voidCallback) async {
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
-    String steamPath = '$home/.local/share/Steam';
-    await _validateDir(steamPath);
+    String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;
+    if (!await _dirExist('$steamPath/steamapps')) {
+      throw Exception(
+        getTranslatedText(
+            "Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: $steamPath\n\nDefault Path: $home/.local/share/Steam",
+            "未找到Steam路径。\n\n您可以在设置中指定路径。\n\n当前路径为: $steamPath\n\n默认路径为: $home/.local/share/Steam"),
+      );
+    }
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
-    await _validateDir(gamePath);
-    String protonPath = await _getProtonPath(gamePath);
+    if (!await _dirExist(gamePath)) {
+      int? nonSteamGameId = _getAppIdFromPS();
+      if (nonSteamGameId == null) {
+        throw Exception(getTranslatedText(
+            "Game path not found. Please ensure the game is installed.\n\nIf it's a non-Steam game, make sure the game is running.\n\nCurrent Path: $gamePath",
+            "游戏路径未找到。请确保游戏已安装。\n\n如果是非Steam游戏，请确保游戏已启动。\n\n当前路径为: $gamePath"));
+      } else {
+        gamePath = '$steamPath/steamapps/compatdata/$nonSteamGameId';
+      }
+    }
 
+    String protonPath = await _getProtonPath(gamePath);
     voidCallback();
     await Process.run(protonPath, [
       'run',
@@ -37,17 +54,28 @@ Future<String> _getProtonPath(String gamePath) async {
       protonPath = arr.sublist(0, index + 1).join('/');
     }
   }
-  if (protonPath == null) {
-    throw Exception('proton not exist');
+  if (protonPath == null || !await _dirExist(protonPath)) {
+    throw Exception(getTranslatedText(
+        'Proton path not found.\n\nPlease ensure Proton is installed.\n\nCurrent Path: $protonPath', '未找到Proton路径。\n\n请确认已安装Proton。\n\n当前路径为: $protonPath'));
   }
-  _validateDir(protonPath);
   return '$protonPath/proton';
 }
 
-Future<void> _validateDir(String path) async {
-  var dir = Directory(path);
-  bool exist = await dir.exists();
-  if (!exist) {
-    throw Exception(getTranslatedText('$path not found\nMake sure Steam, Proton and Game all are installed', '未找到$path\n请确保Steam, Proton和游戏都已安装'));
+int? _getAppIdFromPS() {
+  final processResult = Process.runSync('/bin/sh', ['-c', r'ps aux | grep "SteamLaunch AppId="']);
+  if (processResult.exitCode == 0) {
+    final outputLines = (processResult.stdout as String).split('\n');
+    for (final line in outputLines) {
+      final match = RegExp(r'SteamLaunch AppId=(\d+)').firstMatch(line);
+      final appId = int.tryParse(match?.group(1) ?? '');
+      if (appId != null) {
+        return appId;
+      }
+    }
   }
+  return null;
+}
+
+Future<bool> _dirExist(String path) async {
+  return await Directory(path).exists();
 }

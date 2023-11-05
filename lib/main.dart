@@ -1,6 +1,7 @@
 import 'page/game.dart';
 import 'page/library.dart';
 import 'util/dto.dart';
+import 'util/game_launcher.dart';
 import 'util/language.dart';
 import 'util/server.dart';
 import 'util/storage.dart';
@@ -113,8 +114,6 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         Tab(text: getTranslatedText('Game', '游戏')),
       ];
     });
-    // save config
-    localStorage.writeConfig();
   }
 
   void updateBackButton() {
@@ -126,10 +125,11 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   void _loadConfig() async {
     Map<String, dynamic>? config = await localStorage.readConfig();
     if (config != null) {
-      String language = config['language'] as String;
+      String language = config['language'] ?? languageOptions[0];
       if (language != selectedLanguage && languageOptions.indexWhere((element) => element == language) != -1) {
         updateLanguage(language);
       }
+      customSteamPath = config['custom_steam_path'] ?? "";
     }
     latestVersion = await server.getLatestVersion();
   }
