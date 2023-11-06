@@ -17,8 +17,9 @@
 ## ❤️ Thank You, Gaming Community
 After posting Reddit threads introducing LaLa, I received valuable feedback and input from many gamers. I want to express my gratitude to all of you.   
 Below is a list of to-do items based on the feedback I've received:
-- Work on making the launcher compatible with non-Steam games.
+- [x] Work on making the launcher compatible with non-Steam games.
 - Improve warnings and safeguards for multiplayer games.
+- Improve SteamDeck gaming mode experience.
 
 # 👀 Screenshots
 <div align="center">
