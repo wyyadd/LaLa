@@ -29,13 +29,25 @@ Future<void> launchGame(String trainerPath, int appId, VoidCallback voidCallback
 
     String protonPath = await _getProtonPath(gamePath);
     voidCallback();
-    await Process.run(protonPath, [
-      'run',
-      trainerPath
-    ], environment: {
-      'STEAM_COMPAT_CLIENT_INSTALL_PATH': steamPath,
-      'STEAM_COMPAT_DATA_PATH': gamePath,
-    });
+    // in platpak sandbox
+    if (Platform.environment['container'] != null) {
+      await Process.run('flatpak-spawn', [
+        '--host',
+        '--env=STEAM_COMPAT_CLIENT_INSTALL_PATH=$steamPath',
+        '--env=STEAM_COMPAT_DATA_PATH=$gamePath',
+        protonPath,
+        'run',
+        trainerPath,
+      ]);
+    } else {
+      await Process.run(protonPath, [
+        'run',
+        trainerPath
+      ], environment: {
+        'STEAM_COMPAT_CLIENT_INSTALL_PATH': steamPath,
+        'STEAM_COMPAT_DATA_PATH': gamePath,
+      });
+    }
   } else {
     Process.run(trainerPath, []);
   }
@@ -55,14 +67,20 @@ Future<String> _getProtonPath(String gamePath) async {
     }
   }
   if (protonPath == null || !await _dirExist(protonPath)) {
-    throw Exception(getTranslatedText(
-        'Proton path not found.\n\nPlease ensure Proton is installed.\n\nCurrent Path: $protonPath', '未找到Proton路径。\n\n请确认已安装Proton。\n\n当前路径为: $protonPath'));
+    throw Exception(getTranslatedText('Proton path not found.\n\nPlease ensure Proton is installed.\n\nCurrent Path: $protonPath',
+        '未找到Proton路径。\n\n请确认已安装Proton。\n\n当前路径为: $protonPath'));
   }
   return '$protonPath/proton';
 }
 
 int? _getAppIdFromPS() {
-  final processResult = Process.runSync('/bin/sh', ['-c', r'ps aux | grep "SteamLaunch AppId="']);
+  ProcessResult processResult;
+  // in platpak sandbox
+  if (Platform.environment['container'] != null) {
+    processResult = Process.runSync('flatpak-spawn', ['--host', '/bin/sh', '-c', 'ps aux | grep "SteamLaunch AppId="']);
+  } else {
+    processResult = Process.runSync('/bin/sh', ['-c', 'ps aux | grep "SteamLaunch AppId="']);
+  }
   if (processResult.exitCode == 0) {
     final outputLines = (processResult.stdout as String).split('\n');
     for (final line in outputLines) {
