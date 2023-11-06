@@ -42,9 +42,16 @@ You can download prebuilt binaries directly from [**GitHub releases**](https://g
     or
     sudo apt install ./LaLa_linux_amd64.deb
     or
+    flatpak install --user LaLa_linux_amd64.flatpak
+    or
     run LaLa_linux_amd64.AppImage directly🥰
     ```
-- For Steam Deck User, run **LaLa_linux_amd64.AppImage** directly.
+- For Steam Deck User, run following commands to install.
+    ```bash
+    flatpak install --user LaLa_linux_amd64.flatpak
+    or
+    run LaLa_linux_amd64.AppImage directly🥰
+    ```
 
 ## ⚠️ Important notice for Linux user
 The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftware/Proton) to run trainers. To use trainers, you must:

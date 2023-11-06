@@ -34,9 +34,16 @@
     或者
     sudo apt install ./LaLa_linux_amd64.deb
     或者
+    flatpak install --user LaLa_linux_amd64.flatpak
+    或者
     直接运行 LaLa_linux_amd64.AppImage
     ```
-- 对于SteamDeck用户，直接运行**LaLa_linux_amd64.AppImage**
+- 对于SteamDeck用户，运行以下命令安装
+    ```bash
+    flatpak install --user LaLa_linux_amd64.flatpak
+    或者
+    直接运行 LaLa_linux_amd64.AppImage
+    ```
 
 ## ⚠️ Linux和Steam Deck用户的注意事项
 LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运行修改器。要使用修改器，你必须:
