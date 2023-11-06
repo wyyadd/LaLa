@@ -10,4 +10,5 @@ mkdir -p "$package_dir/$app_name"
 cp -fr "$current_dir/linux/x64/release/bundle/." \
   "$package_dir/$app_name"
 mkdir -p "$package_dir/bin"
+chmod +x $package_dir/$app_name/$app_name
 ln -s "$package_dir/$app_name/$app_name" "$package_dir/bin/$app_name"
