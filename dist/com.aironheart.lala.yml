@@ -12,6 +12,7 @@ finish-args:
   - --device=dri
   - --share=network
   - --filesystem=home
+  - --filesystem=~/.var/app/com.valvesoftware.Steam/
   - --talk-name=org.freedesktop.Flatpak
 modules:
   - name: LaLa
