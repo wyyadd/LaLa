@@ -163,32 +163,10 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
 
   @override
   void onWindowClose() async {
-    showDialog(
-      context: context,
-      builder: (_) {
-        return AlertDialog(
-          title: Text(getTranslatedText('Are you sure you want to close this window?', '确定关闭窗口?')),
-          actions: [
-            TextButton(
-              child: Text(getTranslatedText('No', '取消')),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: Text(getTranslatedText('Yes', '确定')),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                await localStorage.writeConfig();
-                await localStorage.writeGameList(libraryGames, libraryFileName);
-                await killAllTrainers();
-                await windowManager.destroy();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    await localStorage.writeConfig();
+    await localStorage.writeGameList(libraryGames, libraryFileName);
+    await killAllTrainers();
+    await windowManager.destroy();
   }
 
   @override
@@ -231,22 +209,30 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                 ),
                 const Spacer(),
                 CustomSearchBar(updateSearchGames: updateSearchGames),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: IconButton(
-                    icon: const Icon(Icons.settings),
-                    color: Colors.grey,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
-                      );
-                    },
-                  ),
+                const SizedBox(width: 5),
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  color: Colors.grey,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
+                    );
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.exit_to_app),
+                  color: Colors.grey,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onPressed: () {
+                    windowManager.destroy();
+                  },
                 ),
               ],
             ),
