@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 String customSteamPath = "";
 
-Future<void> launchGame(String trainerPath, int appId, VoidCallback voidCallback) async {
+Future<void> launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
     String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;
@@ -28,7 +28,7 @@ Future<void> launchGame(String trainerPath, int appId, VoidCallback voidCallback
     }
 
     String protonPath = await _getProtonPath(gamePath);
-    voidCallback();
+    stopCircleIndicator();
     // in platpak sandbox
     if (Platform.environment['container'] != null) {
       await Process.run('flatpak-spawn', [
@@ -96,4 +96,15 @@ int? _getAppIdFromPS() {
 
 Future<bool> _dirExist(String path) async {
   return await Directory(path).exists();
+}
+
+Future<void> killAllTrainers() async {
+  if (Platform.isLinux) {
+    // in platpak sandbox
+    if (Platform.environment['container'] != null) {
+      Process.runSync('flatpak-spawn', ['--host', 'pkill', '-f', 'TrainerCacheData.*x-ms-dos-executable']);
+    } else {
+      Process.runSync('pkill', ['-f', 'TrainerCacheData.*x-ms-dos-executable']);
+    }
+  }
 }
