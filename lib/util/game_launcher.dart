@@ -77,9 +77,9 @@ int? _getAppIdFromPS() {
   ProcessResult processResult;
   // in platpak sandbox
   if (Platform.environment['container'] != null) {
-    processResult = Process.runSync('flatpak-spawn', ['--host', '/bin/sh', '-c', 'ps aux | grep "SteamLaunch AppId="']);
+    processResult = Process.runSync('flatpak-spawn', ['--host', '/bin/sh', '-c', 'ps aux | grep "SteamLaunch AppId=" | grep -v -i "lala"']);
   } else {
-    processResult = Process.runSync('/bin/sh', ['-c', 'ps aux | grep "SteamLaunch AppId="']);
+    processResult = Process.runSync('/bin/sh', ['-c', 'ps aux | grep "SteamLaunch AppId=" | grep -v -i "lala"']);
   }
   if (processResult.exitCode == 0) {
     final outputLines = (processResult.stdout as String).split('\n');
