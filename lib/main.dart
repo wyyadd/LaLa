@@ -131,6 +131,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
       }
       customSteamPath = config['custom_steam_path'] ?? "";
     }
+    configLoaded = true;
     latestVersion = await server.getLatestVersion();
   }
 
@@ -142,6 +143,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         libraryPage = LibraryPage(libraryGames: libraryGames, updateBackButton: updateBackButton);
       });
     }
+    gameLoaded = true;
     if (hotListGames.isEmpty) {
       List<Game> localHotGames = await localStorage.readGameList(hotListFileName);
       if (localHotGames.isNotEmpty) {
@@ -163,10 +165,13 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
 
   @override
   void onWindowClose() async {
-    await localStorage.writeConfig();
-    await localStorage.writeGameList(libraryGames, libraryFileName);
-    await killAllTrainers();
-    await windowManager.destroy();
+    bool isPreventClose = await windowManager.isPreventClose();
+    if (isPreventClose) {
+      await localStorage.writeConfig();
+      await localStorage.writeGameList(libraryGames, libraryFileName);
+      await killAllTrainers();
+      await windowManager.destroy();
+    }
   }
 
   @override
@@ -231,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                   highlightColor: Colors.transparent,
                   hoverColor: Colors.transparent,
                   onPressed: () {
-                    windowManager.destroy();
+                    onWindowClose();
                   },
                 ),
               ],

@@ -5,6 +5,7 @@ import 'file_system.dart';
 import 'game_launcher.dart';
 import 'language.dart';
 import 'package:flutter/material.dart';
+import 'package:synchronized/synchronized.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
@@ -16,8 +17,13 @@ const Map<String, String> cacheHeader = {'x-file-psk': 'lala-trainers-launcher'}
 
 final LocalStorage localStorage = LocalStorage();
 late final CacheManager cacheManager;
+bool configLoaded = false;
+bool gameLoaded = false;
 
 class LocalStorage {
+  static final _configFileLock = Lock();
+  static final _gameFileLock = Lock();
+
   Future<String> get localPath async {
     final directory = await getApplicationCacheDirectory();
     return '${directory.path}/config';
@@ -64,15 +70,25 @@ class LocalStorage {
   }
 
   Future<void> writeConfig() async {
+    if (!configLoaded) {
+      return;
+    }
     final path = await localPath;
     final file = File('$path/$configFileName');
     String config = jsonEncode({'language': selectedLanguage, 'custom_steam_path': customSteamPath});
-    file.writeAsString(config);
+    await _configFileLock.synchronized(() async {
+      await file.writeAsString(config);
+    });
   }
 
   Future<void> writeGameList(List<Game> games, String fileName) async {
+    if (!gameLoaded) {
+      return;
+    }
     final path = await localPath;
     final file = File('$path/$fileName');
-    file.writeAsString(jsonEncode(games));
+    await _gameFileLock.synchronized(() async {
+      await file.writeAsString(jsonEncode(games));
+    });
   }
 }
