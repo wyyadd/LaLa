@@ -181,6 +181,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                 Navigator.of(context).pop();
                 await localStorage.writeConfig();
                 await localStorage.writeGameList(libraryGames, libraryFileName);
+                await killAllTrainers();
                 await windowManager.destroy();
               },
             ),
