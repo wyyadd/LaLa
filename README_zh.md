@@ -63,6 +63,10 @@ LaLa使用的大多数修改器都来自于[**风灵月影**](https://flingtrain
 在Windows中，位于```%LOCALAPPDATA%/com.aironheart.lala``` 文件夹。  
 在Linux或Steam Deck中，位于 ```$XDG_CACHE_HOME/com.aironheart.lala```或```~/.cache/com.aironheart.lala```文件夹中。
 
+### 在linux或SteamDeck中，为什么有些修改器无法启动?
+这是一个与.Net依赖有关的问题，请参考该[GitHub问题](https://github.com/madewokherd/wine-mono/issues/167)以获取更多信息。  
+临时解决方案：[重新安装dotnet40](docs/reinstall_dotnet40.md)。
+
 ### 为什么把它被命名为LaLa？
 它是以一部我很喜欢的电影《爱乐之城 (La La Land)》命名。希望您能享受使用这个软件。💃
 
