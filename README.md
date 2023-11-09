@@ -11,15 +11,8 @@
   </div>
   A free and cross-platform trainers launcher for enhancing your gaming experience🤗.  
   <br><br>
-  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a></span>
+  <span style="font-size: 16px;"><a href="./docs/README_zh.md">简体中文</a></span>
 </div>
-
-## ❤️ Thank You, Gaming Community
-After posting Reddit threads introducing LaLa, I received valuable feedback and input from many gamers. I want to express my gratitude to all of you.   
-Below is a list of to-do items based on the feedback I've received:
-- [x] Work on making the launcher compatible with non-Steam games.
-- Improve warnings and safeguards for multiplayer games.
-- Improve SteamDeck gaming mode experience.
 
 # 👀 Screenshots
 <div align="center">
@@ -70,6 +63,10 @@ While every effort is made to ensure their safety, please use them **responsibly
 ### Where is LaLa Trainers Launcher's cache data stored?
 On Windows, the cache data is located in the ```%LOCALAPPDATA%/com.aironheart.lala``` directory.  
 On Linux, it can be found in either ```$XDG_CACHE_HOME/com.aironheart.lala``` or ```~/.cache/com.aironheart.lala```.
+
+### On Linux or Steam Deck, why some trainers won't start?
+This is an issue related to .Net dependencies. Please check [this issue](https://github.com/madewokherd/wine-mono/issues/167) for more details.   
+**Temporary Solution**: [Reinstalling dotnet40](docs/reinstall_dotnet40.md).
 
 ### Why is it named LaLa Trainers Launcher?
 It's named after my love for the movie "La La Land". I hope you can enjoy using the software.💃🏽
