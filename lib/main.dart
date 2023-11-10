@@ -10,8 +10,13 @@ import 'widget/custom_setting_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-void main() {
+void main(List<String> args) async {
   localStorage.initCacheManager();
+  if (args.contains("--full-screen")) {
+    WidgetsFlutterBinding.ensureInitialized();
+    await windowManager.ensureInitialized();
+    windowManager.setFullScreen(true);
+  }
   runApp(const MyApp());
 }
 
