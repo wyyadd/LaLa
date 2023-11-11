@@ -46,8 +46,14 @@ class LocalStorage {
       final file = File('$path/$fileName');
 
       final contents = await file.readAsString();
-      List<Game> parsedGames =
-          (jsonDecode(contents) as List<dynamic>).map((dynamic gameJson) => Game.fromJson(gameJson as Map<String, dynamic>)).toList();
+      List<Game> parsedGames = (jsonDecode(contents) as List<dynamic>).map((dynamic gameJson) {
+        gameJson = gameJson as Map<String, dynamic>;
+        if (gameJson.containsKey('trainer_path')) {
+          return CustomGame.fromJson(gameJson);
+        } else {
+          return OnlineGame.fromJson(gameJson);
+        }
+      }).toList();
       return parsedGames;
     } catch (e) {
       debugPrint(e.toString());

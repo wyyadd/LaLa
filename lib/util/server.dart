@@ -16,7 +16,7 @@ class Server {
       final response = await http.get(Uri.parse(hotListApi));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         List<Game> parsedGames =
-            (jsonDecode(response.body) as List<dynamic>).map((dynamic gameJson) => Game.fromJson(gameJson as Map<String, dynamic>)).toList();
+            (jsonDecode(response.body) as List<dynamic>).map((dynamic gameJson) => OnlineGame.fromJson(gameJson as Map<String, dynamic>)).toList();
         return parsedGames;
       } else {
         return [];
@@ -32,7 +32,7 @@ class Server {
       final response = await http.get(Uri.parse('$searchApi?query=$query'));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
         List<Game> parsedGames =
-            (jsonDecode(response.body) as List<dynamic>).map((dynamic gameJson) => Game.fromJson(gameJson as Map<String, dynamic>)).toList();
+            (jsonDecode(response.body) as List<dynamic>).map((dynamic gameJson) => OnlineGame.fromJson(gameJson as Map<String, dynamic>)).toList();
         return parsedGames;
       } else {
         return [];
@@ -57,11 +57,11 @@ class Server {
     }
   }
 
-  Future<Game?> getGameUpdate(String id) async {
+  Future<OnlineGame?> getGameUpdate(String id) async {
     try {
       final response = await http.get(Uri.parse('$updateApi?id=$id'));
       if (response.statusCode == 200 && response.body.isNotEmpty) {
-        Game game = Game.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        OnlineGame game = OnlineGame.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
         return game;
       } else {
         return null;

@@ -11,9 +11,9 @@ final GlobalKey<NavigatorState> navGameKey = GlobalKey<NavigatorState>();
 typedef UpdateLibraryFunction = void Function(Game game, bool switchTab);
 
 class GamePage extends StatefulWidget {
-  const GamePage({super.key, this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator});
+  const GamePage({super.key, required this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator});
 
-  final List<Game>? searchedGames;
+  final List<Game> searchedGames;
   final UpdateLibraryFunction updateLibraryGames;
   final bool? showCircularIndicator;
 
@@ -22,7 +22,7 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  String _selectedGame = '';
+  String _selectedGameId = '';
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class _GamePageState extends State<GamePage> {
                 padding: const EdgeInsets.all(30),
                 child: widget.showCircularIndicator != null && widget.showCircularIndicator == true
                     ? const Center(child: SizedBox(height: 60, width: 60, child: CircularProgressIndicator(color: Colors.white)))
-                    : widget.searchedGames == null || widget.searchedGames!.isEmpty
+                    : widget.searchedGames.isEmpty
                         ? Center(
                             child: Text(
                             getTranslatedText('Oops, no results found. Try different keywords!', '抱歉，没有找到相关结果。试试其他关键词吧！'),
@@ -43,16 +43,17 @@ class _GamePageState extends State<GamePage> {
                             child: Wrap(
                               spacing: 20,
                               runSpacing: 20,
-                              children: widget.searchedGames!.map((game) {
+                              children: widget.searchedGames.map((game) {
+                                game = game as OnlineGame;
                                 return Column(
                                   children: [
                                     InkWell(
                                       onTap: () {
                                         widget.updateLibraryGames(game, true);
                                       },
-                                      onHover: (value) {
+                                      onHover: (isSelected) {
                                         setState(() {
-                                          _selectedGame = value ? game.name : '';
+                                          _selectedGameId = isSelected ? game.id : '';
                                         });
                                       },
                                       child: Container(
@@ -66,7 +67,7 @@ class _GamePageState extends State<GamePage> {
                                           ),
                                         ),
                                         child: Column(children: [
-                                          if (_selectedGame == game.name) ...[
+                                          if (_selectedGameId == game.id) ...[
                                             const Spacer(),
                                             SizedBox(
                                               height: 40,
@@ -79,7 +80,7 @@ class _GamePageState extends State<GamePage> {
                                                   widget.updateLibraryGames(game, false);
                                                   navGameKey.currentState!.push(
                                                     CustomPageRoute(
-                                                      child: DetailPage(game: game, runTrainer: true),
+                                                      child: DetailPage(game: game as OnlineGame, runTrainer: true),
                                                     ),
                                                   );
                                                 },

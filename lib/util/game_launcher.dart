@@ -4,7 +4,35 @@ import 'package:flutter/material.dart';
 
 String customSteamPath = "";
 
-Future<void> launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
+Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
+  try {
+    await _launchGame(trainerPath, appId, stopCircleIndicator);
+  } catch (e) {
+    if (context.mounted) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(getTranslatedText('Launch failed', '启动失败')),
+            content: SelectableText(e.toString()),
+            actions: <Widget>[
+              TextButton(
+                child: Text(getTranslatedText('ok', '确定')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  } finally {
+    stopCircleIndicator();
+  }
+}
+
+Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
     String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;

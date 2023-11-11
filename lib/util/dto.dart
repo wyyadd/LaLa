@@ -22,31 +22,42 @@ class Trainer {
   }
 }
 
-class Game {
+abstract class Game {
   String name;
-  String nameZh;
   int appId;
+
+  Game({required this.name, required this.appId});
+
+  Map<String, dynamic> toJson();
+
+  String get id {
+    return '$appId:$name';
+  }
+}
+
+class OnlineGame extends Game {
+  String nameZh;
   String coverImageUrl;
   String? selectedVersion;
   List<Trainer> trainers;
 
-  Game({
-    required this.name,
+  OnlineGame({
+    required super.name,
     required this.nameZh,
-    required this.appId,
+    required super.appId,
     required this.coverImageUrl,
     this.selectedVersion,
     required this.trainers,
   });
 
-  factory Game.fromJson(Map<String, dynamic> json) {
+  factory OnlineGame.fromJson(Map<String, dynamic> json) {
     List<dynamic> trainerList = json['trainers'];
     List<Trainer> trainers = [];
     for (var trainerJson in trainerList) {
       trainers.add(Trainer.fromJson(trainerJson));
     }
 
-    return Game(
+    return OnlineGame(
       name: json['name'] as String,
       nameZh: json['name_zh'] == null ? json['name'] : json['name_zh'] as String,
       appId: json['app_id'] as int,
@@ -56,6 +67,7 @@ class Game {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     List<Map<String, dynamic>> trainerList = [];
     for (var trainer in trainers) {
@@ -69,6 +81,37 @@ class Game {
       'cover_image_url': coverImageUrl,
       'selected_version': selectedVersion,
       'trainers': trainerList,
+    };
+  }
+}
+
+class CustomGame extends Game {
+  String coverImagePath;
+  String trainerPath;
+
+  CustomGame({
+    required super.name,
+    required super.appId,
+    required this.coverImagePath,
+    required this.trainerPath,
+  });
+
+  factory CustomGame.fromJson(Map<String, dynamic> json) {
+    return CustomGame(
+      name: json['name'] as String,
+      appId: json['app_id'] as int,
+      coverImagePath: json['cover_image_path'] as String,
+      trainerPath: json['trainer_path'] as String,
+    );
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'app_id': appId,
+      'cover_image_path': coverImagePath,
+      'trainer_path': trainerPath,
     };
   }
 }
