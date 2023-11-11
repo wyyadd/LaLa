@@ -68,6 +68,10 @@ On Linux, it can be found in either ```$XDG_CACHE_HOME/com.aironheart.lala``` or
 This is an issue related to .Net dependencies. Please check [this issue](https://github.com/madewokherd/wine-mono/issues/167) for more details.   
 **Temporary Solution**: [Reinstalling dotnet40](docs/reinstall_dotnet40.md).
 
+### On Linux or Steam Deck Gaming mode, why some trainers keep flickering?
+This is an issue related to wayland. Wine/Proton doesn't have native wayland support yet.  
+**Temporary Solution**: Switch to x11 or Enable Virtual Desktop. 
+
 ### Why is it named LaLa Trainers Launcher?
 It's named after my love for the movie "La La Land". I hope you can enjoy using the software.💃🏽
 

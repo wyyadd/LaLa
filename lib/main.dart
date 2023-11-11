@@ -53,8 +53,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   bool showBackButton = false;
   String latestVersion = "";
 
-  LibraryPage libraryPage = LibraryPage(updateBackButton: () {});
-  GamePage gamePage = GamePage(updateLibraryGames: (game, switchTab) {});
+  LibraryPage libraryPage = LibraryPage(libraryGames: const [], updateBackButton: () {});
+  GamePage gamePage = GamePage(searchedGames: const [], updateLibraryGames: (game, switchTab) {});
 
   List<Game> libraryGames = [];
   List<Game> hotListGames = [];
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     navGameKey.currentState?.popUntil((route) => route.isFirst);
     tabController.animateTo(1);
     setState(() {
-      gamePage = GamePage(updateLibraryGames: updateLibraryGames, showCircularIndicator: true);
+      gamePage = GamePage(searchedGames: const [], updateLibraryGames: updateLibraryGames, showCircularIndicator: true);
     });
     var games = await server.searchGames(prompt);
     setState(() {

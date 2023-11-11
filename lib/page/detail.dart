@@ -1,4 +1,3 @@
-import 'dart:io';
 import '../util/dto.dart';
 import '../util/game_launcher.dart';
 import '../util/language.dart';
@@ -8,7 +7,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  final Game game;
+  final OnlineGame game;
   final bool? runTrainer;
 
   const DetailPage({super.key, required this.game, this.runTrainer});
@@ -30,7 +29,7 @@ class _DetailPageState extends State<DetailPage> {
     if (widget.runTrainer == true) {
       launchTrainer();
     }
-    server.getGameUpdate('${widget.game.appId}:${widget.game.name}').then((g) {
+    server.getGameUpdate(widget.game.id).then((g) {
       if (g != null && mounted) {
         if (g.trainers.length != widget.game.trainers.length || g.trainers[0].trainerUrl != widget.game.trainers[0].trainerUrl) {
           setState(() {
@@ -115,43 +114,18 @@ class _DetailPageState extends State<DetailPage> {
     setState(() {
       showCircularIndicator = true;
     });
-    try {
-      int index = widget.game.trainers.indexWhere((element) => element.versionName == widget.game.selectedVersion);
-      if (index == -1) {
-        index = 0;
-      }
-      File file = await cacheManager.getSingleFile(widget.game.trainers[index].trainerUrl, headers: cacheHeader);
-      await launchGame(file.path, widget.game.appId, () {
-        setState(() {
-          showCircularIndicator = false;
-        });
-      });
-    } catch (e) {
-      if (context.mounted) {
-        showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(getTranslatedText('Launch failed', '启动失败')),
-              content: SelectableText(e.toString()),
-              actions: <Widget>[
-                TextButton(
-                  child: Text(getTranslatedText('ok', '确定')),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      }
-    } finally {
-      if (showCircularIndicator) {
-        setState(() {
-          showCircularIndicator = false;
-        });
-      }
+    int index = widget.game.trainers.indexWhere((element) => element.versionName == widget.game.selectedVersion);
+    if (index == -1) {
+      index = 0;
     }
+    await cacheManager.getSingleFile(widget.game.trainers[index].trainerUrl, headers: cacheHeader).then((file) async {
+      await launchGame(context, file.path, widget.game.appId, () {
+        if (showCircularIndicator) {
+          setState(() {
+            showCircularIndicator = false;
+          });
+        }
+      });
+    });
   }
 }
