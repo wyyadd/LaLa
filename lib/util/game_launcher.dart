@@ -53,8 +53,8 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
       int? nonSteamGameId = _getAppIdFromPS();
       if (nonSteamGameId == null) {
         throw Exception(getTranslatedText(
-            "Game path not found. Please ensure the game is installed.\n\nIf it's a non-Steam game, make sure the game is running.\n\nCurrent Path: $gamePath",
-            "游戏路径未找到。请确保游戏已安装。\n\n如果是非Steam游戏，请确保游戏已启动。\n\n当前路径为: $gamePath"));
+            "Game path not found. Please ensure the game is installed.\n\nIf it's a non-Steam game or a custom trainer, make sure the game is running.\n\nCurrent Path: $gamePath",
+            "游戏路径未找到。请确保游戏已安装。\n\n如果是非Steam游戏或者自定义修改器，请确保游戏已启动。\n\n当前路径为: $gamePath"));
       } else {
         gamePath = '$steamPath/steamapps/compatdata/$nonSteamGameId';
       }
