@@ -92,17 +92,16 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   void updateLibraryGames(Game game, bool switchTab, bool showBackButton) {
     final existingGameIndex = libraryGames.indexWhere((existingGame) => existingGame.id == game.id);
     if (existingGameIndex != -1) {
-      setState(() {
-        libraryGames.removeAt(existingGameIndex);
-        libraryGames.insert(0, game);
-      });
+      libraryGames.removeAt(existingGameIndex);
+      libraryGames.insert(0, game);
     } else {
-      setState(() {
-        libraryGames.insert(0, game);
-      });
+      libraryGames.insert(0, game);
     }
     // save game library
     localStorage.writeGameList(libraryGames, libraryFileName);
+    setState(() {
+      libraryPage = LibraryPage(libraryGames: libraryGames, updateBackButton: updateBackButton);
+    });
     if (switchTab) {
       tabController.animateTo(0);
     }
