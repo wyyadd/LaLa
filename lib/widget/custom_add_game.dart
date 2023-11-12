@@ -145,7 +145,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                       if (gameNameController.text.isNotEmpty && trainerPath != null && trainerPath!.isNotEmpty) {
                         CustomGame game = CustomGame(
                           name: gameNameController.text,
-                          appId: Random().nextInt(3000000000)+1000000000,
+                          appId: Random().nextInt(3000000000) + 1000000000,
                           coverImagePath: coverImagePath ?? "",
                           trainerPath: trainerPath!,
                         );
