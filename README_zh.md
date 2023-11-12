@@ -67,6 +67,10 @@ LaLa使用的大多数修改器都来自于[**风灵月影**](https://flingtrain
 这是一个与.Net依赖有关的问题，请参考该[GitHub问题](https://github.com/madewokherd/wine-mono/issues/167)以获取更多信息。  
 临时解决方案：[重新安装dotnet40](docs/reinstall_dotnet40.md)。
 
+### 在linux或SteamDeck的游戏模式中，为什么有些修改器一直闪烁?
+这是一个与wayland有关的问题，请参考该[GitHub问题](https://github.com/wyyadd/LaLa/issues/6)以获取更多信息。  
+临时解决方案： 从wayland切换到X11 或 [启动虚拟桌面](docs/enable_virtual_desktop.md)。
+
 ### 为什么把它被命名为LaLa？
 它是以一部我很喜欢的电影《爱乐之城 (La La Land)》命名。希望您能享受使用这个软件。💃
 
