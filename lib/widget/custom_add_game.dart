@@ -152,6 +152,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                         widget.updateLibraryGames(game, false, false);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
+                            duration: const Duration(seconds: 1),
                             backgroundColor: const Color(0xFF2E3466),
                             content: Center(
                               child: Text(
