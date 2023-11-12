@@ -57,6 +57,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                   ),
                                 );
                               } else {
+                                setState(() {});
                                 await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {});
                               }
                             },
@@ -75,10 +76,15 @@ class _LibraryPageState extends State<LibraryPage> {
                                         image: CachedNetworkImageProvider(game.coverImageUrl, headers: cacheHeader, cacheManager: cacheManager),
                                         fit: BoxFit.cover,
                                       )
-                                    : DecorationImage(
-                                        image: FileImage(File((game as CustomGame).coverImagePath)),
-                                        fit: BoxFit.cover,
-                                      ),
+                                    : (game as CustomGame).coverImagePath.isNotEmpty
+                                        ? DecorationImage(
+                                            image: FileImage(File(game.coverImagePath)),
+                                            fit: BoxFit.cover,
+                                          )
+                                        : const DecorationImage(
+                                            image: AssetImage('image/default_game_cover.jpg'),
+                                            fit: BoxFit.cover,
+                                          ),
                               ),
                               child: Column(children: [
                                 if (_selectedGameId == game.id) ...[
@@ -120,6 +126,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                             ),
                                           );
                                         } else {
+                                          setState(() {});
                                           await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {});
                                         }
                                       },

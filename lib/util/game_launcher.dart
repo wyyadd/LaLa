@@ -33,6 +33,11 @@ Future<void> launchGame(BuildContext context, String trainerPath, int appId, Voi
 }
 
 Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
+  if (!await File(trainerPath).exists()) {
+    throw Exception(
+      getTranslatedText("Trainer path not found.\n\nCurrent Path: $trainerPath", "未找到修改器路径。\n\n当前路径为: $trainerPath"),
+    );
+  }
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
     String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;
