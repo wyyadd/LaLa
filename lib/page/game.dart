@@ -3,12 +3,12 @@ import '../util/dto.dart';
 import '../util/language.dart';
 import '../util/storage.dart';
 import '../widget/custom_page_route.dart';
+import '../widget/custom_add_game.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 final GlobalKey<NavigatorState> navGameKey = GlobalKey<NavigatorState>();
 
-typedef UpdateLibraryFunction = void Function(Game game, bool switchTab);
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key, required this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator});
@@ -49,7 +49,7 @@ class _GamePageState extends State<GamePage> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        widget.updateLibraryGames(game, true);
+                                        widget.updateLibraryGames(game, true, false);
                                       },
                                       onHover: (isSelected) {
                                         setState(() {
@@ -77,7 +77,7 @@ class _GamePageState extends State<GamePage> {
                                                   backgroundColor: const Color(0xFF00D3C4),
                                                 ),
                                                 onPressed: () {
-                                                  widget.updateLibraryGames(game, false);
+                                                  widget.updateLibraryGames(game, false, true);
                                                   navGameKey.currentState!.push(
                                                     CustomPageRoute(
                                                       child: DetailPage(game: game as OnlineGame, runTrainer: true),

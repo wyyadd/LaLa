@@ -5,6 +5,7 @@ import 'util/game_launcher.dart';
 import 'util/language.dart';
 import 'util/server.dart';
 import 'util/storage.dart';
+import 'widget/custom_add_game.dart';
 import 'widget/custom_search_bar.dart';
 import 'widget/custom_setting_dialog.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   String latestVersion = "";
 
   LibraryPage libraryPage = LibraryPage(libraryGames: const [], updateBackButton: () {});
-  GamePage gamePage = GamePage(searchedGames: const [], updateLibraryGames: (game, switchTab) {});
+  GamePage gamePage = GamePage(searchedGames: const [], updateLibraryGames: (game, switchTab, showBackButton) {});
 
   List<Game> libraryGames = [];
   List<Game> hotListGames = [];
@@ -88,8 +89,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     });
   }
 
-  void updateLibraryGames(Game game, bool switchTab) {
-    final existingGameIndex = libraryGames.indexWhere((existingGame) => existingGame.name == game.name && existingGame.appId == game.appId);
+  void updateLibraryGames(Game game, bool switchTab, bool showBackButton) {
+    final existingGameIndex = libraryGames.indexWhere((existingGame) => existingGame.id == game.id);
     if (existingGameIndex != -1) {
       setState(() {
         libraryGames.removeAt(existingGameIndex);
@@ -104,10 +105,9 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     localStorage.writeGameList(libraryGames, libraryFileName);
     if (switchTab) {
       tabController.animateTo(0);
-    } else {
-      setState(() {
-        showBackButton = true;
-      });
+    }
+    if (showBackButton) {
+      updateBackButton();
     }
   }
 
@@ -219,7 +219,20 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                 ),
                 const Spacer(),
                 CustomSearchBar(updateSearchGames: updateSearchGames),
-                const SizedBox(width: 5),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  color: Colors.grey,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) => CustomAddGame(updateLibraryGames: updateLibraryGames),
+                    );
+                  },
+                ),
                 IconButton(
                   icon: const Icon(Icons.settings),
                   color: Colors.grey,
