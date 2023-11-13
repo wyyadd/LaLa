@@ -58,7 +58,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                 );
                               } else {
                                 setState(() {});
-                                await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {});
+                                await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {}, true);
                               }
                             },
                             onHover: (isSelected) {
@@ -127,7 +127,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                           );
                                         } else {
                                           setState(() {});
-                                          await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {});
+                                          await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {}, true);
                                         }
                                       },
                                       child: Text(getTranslatedText('Launch', '启动')),

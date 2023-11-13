@@ -125,7 +125,7 @@ class _DetailPageState extends State<DetailPage> {
             showCircularIndicator = false;
           });
         }
-      });
+      }, false);
     });
   }
 }
