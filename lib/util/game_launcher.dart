@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 String customSteamPath = "";
 
-Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
+Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
   try {
-    await _launchGame(trainerPath, appId, stopCircleIndicator);
+    await _launchGame(trainerPath, appId, stopCircleIndicator, isCustomTrainer);
   } catch (e) {
     if (context.mounted) {
       showDialog<void>(
@@ -32,7 +32,7 @@ Future<void> launchGame(BuildContext context, String trainerPath, int appId, Voi
   }
 }
 
-Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator) async {
+Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
   if (!await File(trainerPath).exists()) {
     throw Exception(
       getTranslatedText("Trainer path not found.\n\nCurrent Path: $trainerPath", "未找到修改器路径。\n\n当前路径为: $trainerPath"),
@@ -49,12 +49,17 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
       );
     }
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
-    if (!await _dirExist(gamePath)) {
+    if (isCustomTrainer || !await _dirExist(gamePath)) {
       int? nonSteamGameId = _getAppIdFromPS();
       if (nonSteamGameId == null) {
-        throw Exception(getTranslatedText(
-            "Game path not found. Please ensure the game is installed.\n\nIf it's a non-Steam game or a custom trainer, make sure the game is running.\n\nCurrent Path: $gamePath",
-            "游戏路径未找到。请确保游戏已安装。\n\n如果是非Steam游戏或者自定义修改器，请确保游戏已启动。\n\n当前路径为: $gamePath"));
+        if (isCustomTrainer) {
+          throw Exception(getTranslatedText("Game not found. \n\nFor non-Steam games or custom trainers, make sure the game is running.",
+              "游戏未找到。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。"));
+        } else {
+          throw Exception(getTranslatedText(
+              "Game path not found. Please ensure the game is installed.\n\nFor non-Steam games or custom trainers, make sure the game is running.\n\nCurrent Path: $gamePath",
+              "游戏路径未找到。请确保游戏已安装。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。\n\n当前路径为: $gamePath"));
+        }
       } else {
         gamePath = '$steamPath/steamapps/compatdata/$nonSteamGameId';
       }
