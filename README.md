@@ -77,5 +77,5 @@ It's named after my love for the movie "La La Land". I hope you can enjoy using 
 
 ## ☕ Support
 LaLa Trainers Launcher is an open source project that runs on donations.  
-If you want to support me, you can [**buy me a coffee**](https://ko-fi.com/LaLaLauncher) or [**be my patreon**](https://www.patreon.com/LaLaLauncher).
+If you want to support me, you can [**buy me a coffee**](https://ko-fi.com/LaLaLauncher).
 
