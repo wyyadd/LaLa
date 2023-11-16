@@ -76,4 +76,4 @@ LaLa使用的大多数修改器都来自于[**风灵月影**](https://flingtrain
 
 ## ☕ 支持我
 LaLa启动器是一个依靠捐赠运行的开源项目。  
-如果你想支持我，你可以[**给我买一杯咖啡**](https://ko-fi.com/LaLaLauncher) 或 [**成为我的赞助者**](https://www.patreon.com/LaLaLauncher).
+如果你想支持我，你可以[**电我牛牛**](https://afdian.net/a/LaLaLauncher).

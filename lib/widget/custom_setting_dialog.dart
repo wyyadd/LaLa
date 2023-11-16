@@ -249,11 +249,6 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                appVersion,
-                style: const TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(width: 10),
               InkWell(
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
@@ -264,6 +259,24 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                 child: const Text(
                   'Github',
                   style: TextStyle(color: Colors.grey, fontSize: 15),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Text(
+                appVersion,
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(width: 10),
+              InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                onTap: () {
+                  launchUrl(Uri.parse(getTranslatedText('https://ko-fi.com/LaLaLauncher', 'https://afdian.net/a/LaLaLauncher')));
+                },
+                child: Text(
+                  getTranslatedText('Support me', '电我牛牛'),
+                  style: const TextStyle(color: Colors.grey, fontSize: 15),
                 ),
               ),
             ],
