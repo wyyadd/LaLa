@@ -11,7 +11,7 @@
   </div>
   A free and cross-platform trainers launcher for enhancing your gaming experience🤗.  
   <br><br>
-  <span style="font-size: 16px;"><a href="./docs/README_zh.md">简体中文</a></span>
+  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a></span>
 </div>
 
 # 👀 Screenshots
