@@ -33,8 +33,9 @@ class _LibraryPageState extends State<LibraryPage> {
           child: widget.libraryGames.isEmpty
               ? Center(
                   child: Text(
-                  getTranslatedText('The game library is empty. Let\'s start adding games!', '游戏库中还没有游戏，快去添加吧！'),
+                  getTranslatedText("The game library is empty.\nSearch and add your favorites!", '游戏库为空，\n搜索并添加您喜欢的游戏吧！'),
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  textAlign: TextAlign.center,
                 ))
               : SingleChildScrollView(
                   child: Wrap(
