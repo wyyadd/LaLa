@@ -5,8 +5,8 @@
 #define MyAppPublisher "LaLa Team"
 #define MyAppURL "https://github.com/wyyadd/LaLa/"
 #define MyAppExeName "LaLa.exe"
-#define MyAppPath "..\build\windows\x64\runner\Release\" + MyAppExeName
-#define MyAppVersion GetVersionNumbersString(MyAppPath)
+#define MyAppPath "..\build\windows\x64\runner\Release\"
+#define MyAppVersion GetVersionNumbersString(MyAppPath + MyAppExeName)
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -37,8 +37,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "..\build\windows\runner\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\build\windows\runner\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MyAppPath}{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MyAppPath}*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\windows\vclibs\*"; DestDir: "{app}";
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
