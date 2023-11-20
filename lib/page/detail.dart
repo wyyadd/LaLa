@@ -3,6 +3,7 @@ import '../util/game_launcher.dart';
 import '../util/language.dart';
 import '../util/server.dart';
 import '../util/storage.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -31,11 +32,15 @@ class _DetailPageState extends State<DetailPage> {
     }
     server.getGameUpdate(widget.game.id).then((g) {
       if (g != null && mounted) {
-        if (g.trainers.length != widget.game.trainers.length || g.trainers[0].trainerUrl != widget.game.trainers[0].trainerUrl) {
-          setState(() {
-            widget.game.trainers = g.trainers;
-          });
-        }
+        setState(() {
+          widget.game
+            ..appId = g.appId
+            ..name = g.name
+            ..nameZh = g.nameZh
+            ..specialNotes = g.specialNotes
+            ..coverImageUrl = g.coverImageUrl
+            ..trainers = g.trainers;
+        });
       }
     });
   }
@@ -57,10 +62,29 @@ class _DetailPageState extends State<DetailPage> {
             Container(
               width: 500,
               padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text(
-                getTranslatedText(widget.game.name, widget.game.nameZh),
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-                textAlign: TextAlign.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (widget.game.specialNotes.isNotEmpty) const SizedBox(width: 40),
+                  Flexible(
+                    child: Text(
+                      getTranslatedText(widget.game.name, widget.game.nameZh),
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  if (widget.game.specialNotes.isNotEmpty)
+                    IconButton(
+                      onPressed: () {
+                        launchUrl(Uri.parse(widget.game.specialNotes));
+                      },
+                      tooltip: getTranslatedText("Special Notes", "特别提醒"),
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      icon: const Icon(Icons.error_outline, color: Colors.orange, size: 24),
+                    ),
+                ],
               ),
             ),
             SizedBox(

@@ -50,6 +50,8 @@ LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运�
 - 已安装Steam和Proton
 - 已安装修改器对应的游戏
 
+LaLa目前**不支持** [Flatpak版本的Steam](https://flathub.org/apps/com.valvesoftware.Steam) ([#25](https://github.com/wyyadd/LaLa/issues/25))。
+
 ## 🙋 常见问题
 ### 在安装过程中，我的操作系统发出了安全警告。
 LaLa启动器是基于Flutter开发的开源软件。  
