@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF181E42),
+        useMaterial3: false,
       ),
       home: const MyHomePage(),
     );
