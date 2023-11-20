@@ -37,6 +37,7 @@ abstract class Game {
 
 class OnlineGame extends Game {
   String nameZh;
+  String specialNotes;
   String coverImageUrl;
   String? selectedVersion;
   List<Trainer> trainers;
@@ -45,6 +46,7 @@ class OnlineGame extends Game {
     required super.name,
     required this.nameZh,
     required super.appId,
+    required this.specialNotes,
     required this.coverImageUrl,
     this.selectedVersion,
     required this.trainers,
@@ -61,6 +63,7 @@ class OnlineGame extends Game {
       name: json['name'] as String,
       nameZh: json['name_zh'] == null ? json['name'] : json['name_zh'] as String,
       appId: json['app_id'] as int,
+      specialNotes: json['special_notes'] ?? '',
       coverImageUrl: json['cover_image_url'] as String,
       selectedVersion: json['selected_version'] as String?,
       trainers: trainers,
@@ -78,6 +81,7 @@ class OnlineGame extends Game {
       'name': name,
       'name_zh': nameZh,
       'app_id': appId,
+      'special_notes': specialNotes,
       'cover_image_url': coverImageUrl,
       'selected_version': selectedVersion,
       'trainers': trainerList,

@@ -52,6 +52,8 @@ The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftw
 - Install Steam and set up Proton.
 - Have the game already installed.
 
+LaLa currently **don't support** [Flatpak version of Steam](https://flathub.org/apps/com.valvesoftware.Steam) ([#25](https://github.com/wyyadd/LaLa/issues/25)).
+
 ## 🙋 FAQ
 ### During installation, my operating system warns about security.
 LaLa Trainers Launcher is an open-source software developed using Flutter. Any security warning you encounter during installation is a false positive from your system. You can safely proceed with the installation.
