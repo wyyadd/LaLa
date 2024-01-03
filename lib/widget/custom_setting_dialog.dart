@@ -40,7 +40,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
   Widget dialogContent(BuildContext context) {
     return SizedBox(
       height: 300,
-      width: 300,
+      width: 310,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
