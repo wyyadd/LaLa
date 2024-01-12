@@ -12,9 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
   localStorage.initCacheManager();
   if (args.contains("--full-screen")) {
-    WidgetsFlutterBinding.ensureInitialized();
     await windowManager.ensureInitialized();
     windowManager.setFullScreen(true);
   }
@@ -243,7 +243,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
+                      builder: (BuildContext context) =>
+                          CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
                     );
                   },
                 ),
