@@ -67,8 +67,7 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
 
     String protonPath = await _getProtonPath(gamePath);
     stopCircleIndicator();
-    // in platpak sandbox
-    if (Platform.environment['container'] != null) {
+    if (_inSandbox()) {
       await Process.run('flatpak-spawn', [
         '--host',
         '--env=STEAM_COMPAT_CLIENT_INSTALL_PATH=$steamPath',
@@ -87,7 +86,7 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
       });
     }
   } else {
-    Process.run(trainerPath, []);
+    await Process.run(trainerPath, []);
   }
 }
 
@@ -113,8 +112,7 @@ Future<String> _getProtonPath(String gamePath) async {
 
 int? _getAppIdFromPS() {
   ProcessResult processResult;
-  // in platpak sandbox
-  if (Platform.environment['container'] != null) {
+  if (_inSandbox()) {
     processResult = Process.runSync('flatpak-spawn', ['--host', '/bin/sh', '-c', 'ps aux | grep "SteamLaunch AppId=" | grep -v -i "lala"']);
   } else {
     processResult = Process.runSync('/bin/sh', ['-c', 'ps aux | grep "SteamLaunch AppId=" | grep -v -i "lala"']);
@@ -138,11 +136,22 @@ Future<bool> _dirExist(String path) async {
 
 Future<void> killAllTrainers() async {
   if (Platform.isLinux) {
-    // in platpak sandbox
-    if (Platform.environment['container'] != null) {
+    if (_inSandbox()) {
       Process.runSync('flatpak-spawn', ['--host', 'pkill', '-f', 'TrainerCacheData.*x-ms-dos-executable']);
     } else {
       Process.runSync('pkill', ['-f', 'TrainerCacheData.*x-ms-dos-executable']);
     }
   }
+}
+
+bool _inSandbox() {
+  // In flatpak sandbox
+  if (Platform.environment['container'] == 'flatpak') {
+    // In flatpak steam, LaLa should in be the same sandbox.
+    if (Platform.environment['IN_FLATPAK_STEAM'] == '1') {
+      return false;
+    }
+    return true;
+  }
+  return false;
 }
