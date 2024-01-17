@@ -3,6 +3,7 @@ import 'language.dart';
 import 'package:flutter/material.dart';
 
 String customSteamPath = "";
+String macWinePrefix = "";
 
 Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
   try {
@@ -85,8 +86,18 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
         'STEAM_COMPAT_DATA_PATH': gamePath,
       });
     }
+  } else if (Platform.isMacOS) {
+    String home = Platform.environment['HOME']!;
+    String winePrefix = macWinePrefix.isEmpty ? '$home/.wine' : macWinePrefix;
+    await Process.run('/bin/sh', [
+      '-c',
+      'arch -x86_64 /usr/local/opt/game-porting-toolkit/bin/wine64 $trainerPath',
+    ], environment: {
+      'WINEESYNC': '1',
+      'WINEPREFIX': winePrefix,
+    });
   } else {
-    await Process.run(trainerPath, []);
+    Process.run(trainerPath, []);
   }
 }
 

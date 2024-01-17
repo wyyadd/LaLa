@@ -1,6 +1,7 @@
 import '../util/language.dart';
 import '../util/storage.dart';
 import '../util/game_launcher.dart';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
@@ -143,53 +144,104 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
             ],
           ),
           const Divider(height: 5),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  getTranslatedText('Set Steam Path', '设置Steam路径'),
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00D3C4),
-                    ),
-                    child: Text(getTranslatedText('Set', '设置')),
-                    onPressed: () {
-                      FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
-                        debugPrint('$selectedDirectory');
-                        if (selectedDirectory != null) {
-                          customSteamPath = selectedDirectory;
-                          localStorage.writeConfig();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              duration: const Duration(seconds: 1),
-                              backgroundColor: const Color(0xFF2E3466),
-                              content: Center(
-                                child: Text(
-                                  getTranslatedText('Steam path set successfully', 'Steam路径设置成功'),
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                              ),
-                            ),
-                          );
-                        }
-                        Navigator.of(context).pop();
-                      });
-                    },
+          if (Platform.isLinux) ...[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    getTranslatedText('Set Steam Path', '设置Steam路径'),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const Divider(height: 5),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00D3C4),
+                      ),
+                      child: Text(getTranslatedText('Set', '设置')),
+                      onPressed: () {
+                        FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                          debugPrint('$selectedDirectory');
+                          if (selectedDirectory != null) {
+                            customSteamPath = selectedDirectory;
+                            localStorage.writeConfig();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(seconds: 1),
+                                backgroundColor: const Color(0xFF2E3466),
+                                content: Center(
+                                  child: Text(
+                                    getTranslatedText('Steam path set successfully', 'Steam路径设置成功'),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          Navigator.of(context).pop();
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Divider(height: 5),
+          ],
+          if (Platform.isMacOS) ...[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    getTranslatedText('Set WinePrefix', '设置WinePrefix'),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF00D3C4),
+                      ),
+                      child: Text(getTranslatedText('Set', '设置')),
+                      onPressed: () {
+                        FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                          debugPrint('$selectedDirectory');
+                          if (selectedDirectory != null) {
+                            macWinePrefix = selectedDirectory;
+                            localStorage.writeConfig();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: const Duration(seconds: 1),
+                                backgroundColor: const Color(0xFF2E3466),
+                                content: Center(
+                                  child: Text(
+                                    getTranslatedText('WinePrefix set successfully', 'WinePrefix设置成功'),
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+                          Navigator.of(context).pop();
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const Divider(height: 5),
+          ],
           Row(
             children: [
               Padding(
