@@ -24,7 +24,7 @@
 * Windows
 * Linux
 * Steam Deck
-* macOS (coming soon)
+* macOS (Beta)
 
 ## 💬 Discord
 交流与获取帮助🤗.

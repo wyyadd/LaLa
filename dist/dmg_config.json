@@ -1,0 +1,11 @@
+{
+  "title": "LaLa Trainers Launcher",
+  "icon": "../macos/Runner/AppIcon.icns",
+  "window": {
+    "size": { "width": 500, "height": 200 }
+  },
+  "contents": [
+    { "x": 350, "y": 90, "type": "link", "path": "/Applications" },
+    { "x": 150, "y": 90, "type": "file", "path": "../build/macos/Build/Products/Release/LaLa Trainers Launcher.app" }
+  ]
+}
