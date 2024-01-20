@@ -8,6 +8,7 @@
   </div>
     <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
+    <img src="https://dcbadge.vercel.app/api/server/5vpz2V3wB9?style=flat-square&compact=true">
   </div>
   A free and cross-platform trainers launcher for enhancing your gaming experience🤗.  
   <br><br>
@@ -26,6 +27,11 @@
 * Linux
 * Steam Deck
 * macOS (coming soon)
+
+## 💬 Discord
+Feel free to ask and talk🤗.
+
+[![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ Installation
 You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**BiliBili**](https://www.bilibili.com/read/cv27455416)
@@ -52,7 +58,10 @@ The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftw
 - Install Steam and set up Proton.
 - Have the game already installed.
 
-LaLa currently **don't support** [Flatpak version of Steam](https://flathub.org/apps/com.valvesoftware.Steam) ([#25](https://github.com/wyyadd/LaLa/issues/25)).
+For user who uses [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.Steam), you also need to:
+- Add AppImage LaLa as a Non-Steam game.
+- Use ```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run``` as LaLa's launch options.
+- Open LaLa through steam.
 
 ## 🙋 FAQ
 ### During installation, my operating system warns about security.
@@ -78,6 +87,10 @@ This is an issue related to wayland. Please check [this issue](https://github.co
 It's named after my love for the movie "La La Land". I hope you can enjoy using the software.💃🏽
 
 ## ☕ Support
-LaLa Trainers Launcher is an open source project that runs on donations.  
-If you want to support me, you can [**buy me a coffee**](https://ko-fi.com/LaLaLauncher).
+Servers aren't free and running/maintaining this project isn't free either😢.   
+If you want to support me, you can [**buy me a coffee**](https://ko-fi.com/LaLaLauncher).  
+You can also try my AI app: [**AironHeart**](https://www.aironheart.com/).  
+<p align="center">
+	<img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona.svg" height="200" width="200" alt="Mona logo"/>
+</p>
 

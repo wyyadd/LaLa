@@ -8,6 +8,7 @@
   </div>
     <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
+    <img src="https://dcbadge.vercel.app/api/server/5vpz2V3wB9?style=flat-square&compact=true">
   </div>
   免费、开源、跨平台
 </div>
@@ -24,6 +25,11 @@
 * Linux
 * Steam Deck
 * macOS (coming soon)
+
+## 💬 Discord
+交流与获取帮助🤗.
+
+[![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ 安装
 你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases) 或 [**BiliBili**](https://www.bilibili.com/read/cv27455416)下载安装包
@@ -50,7 +56,10 @@ LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运�
 - 已安装Steam和Proton
 - 已安装修改器对应的游戏
 
-LaLa目前**不支持** [Flatpak版本的Steam](https://flathub.org/apps/com.valvesoftware.Steam) ([#25](https://github.com/wyyadd/LaLa/issues/25))。
+对于使用[FlatPak Steam](https://flathub.org/apps/com.valvesoftware.Steam)的用户，你还需要:
+- 将AppImage LaLa添加为非Steam游戏
+- 使用```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run```作为LaLa的启动选项
+- 从Steam启动LaLa
 
 ## 🙋 常见问题
 ### 在安装过程中，我的操作系统发出了安全警告。
@@ -77,5 +86,9 @@ LaLa使用的大多数修改器都来自于[**风灵月影**](https://flingtrain
 它是以一部我很喜欢的电影《爱乐之城 (La La Land)》命名。希望您能享受使用这个软件。💃
 
 ## ☕ 支持我
-LaLa启动器是一个依靠捐赠运行的开源项目。  
-如果你想支持我，你可以[**电我牛牛**](https://afdian.net/a/LaLaLauncher).
+服务器并不是免费的，运行/维护此项目也不是免费的😢。  
+如果你想支持我，你可以[**电我牛牛**](https://afdian.net/a/LaLaLauncher)。  
+你也可以尝试我的AI应用: [**AironHeart**](https://www.aironheart.com/)。  
+<p align="center">
+	<img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona.svg" height="200" width="200" alt="Mona logo"/>
+</p>
