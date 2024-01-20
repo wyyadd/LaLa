@@ -135,6 +135,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         updateLanguage(language);
       }
       customSteamPath = config['custom_steam_path'] ?? "";
+      macWinePrefix = config['mac_wine_prefix'] ?? "";
     }
     configLoaded = true;
     latestVersion = await server.getLatestVersion();

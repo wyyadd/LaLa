@@ -81,7 +81,11 @@ class LocalStorage {
     }
     final path = await localPath;
     final file = File('$path/$configFileName');
-    String config = jsonEncode({'language': selectedLanguage, 'custom_steam_path': customSteamPath});
+    String config = jsonEncode({
+      'language': selectedLanguage,
+      'custom_steam_path': customSteamPath,
+      'mac_wine_prefix': macWinePrefix,
+    });
     await _configFileLock.synchronized(() async {
       await file.writeAsString(config);
     });
