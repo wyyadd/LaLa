@@ -1,24 +1,24 @@
 import 'dart:io';
-import 'language.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 String customSteamPath = "";
 String macWinePrefix = "";
 
 Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
   try {
-    await _launchGame(trainerPath, appId, stopCircleIndicator, isCustomTrainer);
+    await _launchGame(context, trainerPath, appId, stopCircleIndicator, isCustomTrainer);
   } catch (e) {
     if (context.mounted) {
       showDialog<void>(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(getTranslatedText('Launch failed', '启动失败')),
+            title: Text(AppLocalizations.of(context)!.launchFail),
             content: SelectableText(e.toString()),
             actions: <Widget>[
               TextButton(
-                child: Text(getTranslatedText('ok', '确定')),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
@@ -33,40 +33,35 @@ Future<void> launchGame(BuildContext context, String trainerPath, int appId, Voi
   }
 }
 
-Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
+Future<void> _launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
   if (!await File(trainerPath).exists()) {
-    throw Exception(
-      getTranslatedText("Trainer path not found.\n\nCurrent Path: $trainerPath", "未找到修改器路径。\n\n当前路径为: $trainerPath"),
-    );
+    if (!context.mounted) return;
+    throw Exception(AppLocalizations.of(context)!.trainerPathNotFound(trainerPath));
   }
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
     String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;
     if (!await _dirExist('$steamPath/steamapps')) {
-      throw Exception(
-        getTranslatedText(
-            "Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: $steamPath\n\nDefault Path: $home/.local/share/Steam",
-            "未找到Steam路径。\n\n您可以在设置中指定路径。\n\n当前路径为: $steamPath\n\n默认路径为: $home/.local/share/Steam"),
-      );
+      if (!context.mounted) return;
+      throw Exception(AppLocalizations.of(context)!.steamPathNotFound(home, steamPath));
     }
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
     if (isCustomTrainer || !await _dirExist(gamePath)) {
       int? nonSteamGameId = _getAppIdFromPS();
       if (nonSteamGameId == null) {
+        if (!context.mounted) return;
         if (isCustomTrainer) {
-          throw Exception(getTranslatedText("Game not found. \n\nFor non-Steam games or custom trainers, make sure the game is running.",
-              "游戏未找到。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。"));
+          throw Exception(AppLocalizations.of(context)!.customTrainerGamePathNotFound);
         } else {
-          throw Exception(getTranslatedText(
-              "Game path not found. Please ensure the game is installed.\n\nFor non-Steam games or custom trainers, make sure the game is running.\n\nCurrent Path: $gamePath",
-              "游戏路径未找到。请确保游戏已安装。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。\n\n当前路径为: $gamePath"));
+          throw Exception(AppLocalizations.of(context)!.gamePathNotFound(gamePath));
         }
       } else {
         gamePath = '$steamPath/steamapps/compatdata/$nonSteamGameId';
       }
     }
 
-    String protonPath = await _getProtonPath(gamePath);
+    if (!context.mounted) return;
+    String protonPath = await _getProtonPath(context, gamePath);
     stopCircleIndicator();
     if (_inSandbox()) {
       await Process.run('flatpak-spawn', [
@@ -101,7 +96,7 @@ Future<void> _launchGame(String trainerPath, int appId, VoidCallback stopCircleI
   }
 }
 
-Future<String> _getProtonPath(String gamePath) async {
+Future<String> _getProtonPath(BuildContext context, String gamePath) async {
   String? protonPath;
   final configInfoFile = File('$gamePath/config_info');
   if (await configInfoFile.exists()) {
@@ -114,9 +109,12 @@ Future<String> _getProtonPath(String gamePath) async {
       protonPath = arr.sublist(0, index + 1).join('/');
     }
   }
-  if (protonPath == null || !await _dirExist(protonPath)) {
-    throw Exception(getTranslatedText('Proton path not found.\n\nPlease ensure Proton is installed.\n\nCurrent Path: $protonPath',
-        '未找到Proton路径。\n\n请确认已安装Proton。\n\n当前路径为: $protonPath'));
+  if (protonPath == null) {
+    if (!context.mounted) return "";
+    throw Exception(AppLocalizations.of(context)!.protonPathNotFound("Null"));
+  }
+  if (!await _dirExist(protonPath) && context.mounted) {
+    throw Exception(AppLocalizations.of(context)!.protonPathNotFound(protonPath));
   }
   return '$protonPath/proton';
 }

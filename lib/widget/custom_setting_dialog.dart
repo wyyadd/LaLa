@@ -1,11 +1,12 @@
+import 'dart:io';
 import '../util/language.dart';
 import '../util/storage.dart';
 import '../util/game_launcher.dart';
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomSettingDialog extends StatefulWidget {
   const CustomSettingDialog({super.key, required this.updateLanguage, required this.latestVersion});
@@ -49,7 +50,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Text(getTranslatedText('Setting', '设置'), style: const TextStyle(color: Colors.grey)),
+                child: Text(AppLocalizations.of(context)!.setting, style: const TextStyle(color: Colors.grey)),
               ),
               const Spacer(),
               IconButton(
@@ -69,7 +70,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  getTranslatedText('Language', '语言'),
+                  AppLocalizations.of(context)!.language,
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
@@ -108,7 +109,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Text(
-                  getTranslatedText('Clear Cache', '清理缓存'),
+                  AppLocalizations.of(context)!.clearCache,
                   style: const TextStyle(fontSize: 20),
                 ),
               ),
@@ -121,7 +122,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00D3C4),
                     ),
-                    child: Text(getTranslatedText('Clear', '清理')),
+                    child: Text(AppLocalizations.of(context)!.clear),
                     onPressed: () {
                       cacheManager.emptyCache();
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -130,7 +131,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                           backgroundColor: const Color(0xFF2E3466),
                           content: Center(
                             child: Text(
-                              getTranslatedText('Cache cleared successfully', '清理完成'),
+                              AppLocalizations.of(context)!.cacheCleared,
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -150,7 +151,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
-                    getTranslatedText('Set Steam Path', '设置Steam路径'),
+                    AppLocalizations.of(context)!.setSteamPath,
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
@@ -163,7 +164,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00D3C4),
                       ),
-                      child: Text(getTranslatedText('Set', '设置')),
+                      child: Text(AppLocalizations.of(context)!.set),
                       onPressed: () {
                         FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
                           debugPrint('$selectedDirectory');
@@ -176,14 +177,14 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                                 backgroundColor: const Color(0xFF2E3466),
                                 content: Center(
                                   child: Text(
-                                    getTranslatedText('Steam path set successfully', 'Steam路径设置成功'),
+                                    AppLocalizations.of(context)!.steamPathSet,
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
                             );
+                            Navigator.of(context).pop();
                           }
-                          Navigator.of(context).pop();
                         });
                       },
                     ),
@@ -199,7 +200,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
-                    getTranslatedText('Set WinePrefix', '设置WinePrefix'),
+                    AppLocalizations.of(context)!.setWine,
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
@@ -212,7 +213,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF00D3C4),
                       ),
-                      child: Text(getTranslatedText('Set', '设置')),
+                      child: Text(AppLocalizations.of(context)!.set),
                       onPressed: () {
                         FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
                           debugPrint('$selectedDirectory');
@@ -225,14 +226,14 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                                 backgroundColor: const Color(0xFF2E3466),
                                 content: Center(
                                   child: Text(
-                                    getTranslatedText('WinePrefix set successfully', 'WinePrefix设置成功'),
+                                    AppLocalizations.of(context)!.wineSet,
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
                             );
+                            Navigator.of(context).pop();
                           }
-                          Navigator.of(context).pop();
                         });
                       },
                     ),
@@ -250,7 +251,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      getTranslatedText('Check Update', '检查更新'),
+                      AppLocalizations.of(context)!.checkUpdate,
                       style: const TextStyle(fontSize: 20),
                     ),
                     if (widget.latestVersion.isNotEmpty && widget.latestVersion != appVersion) ...[
@@ -283,7 +284,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00D3C4),
                     ),
-                    child: Text(getTranslatedText('Check', '检查')),
+                    child: Text(AppLocalizations.of(context)!.check),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -324,10 +325,10 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                 highlightColor: Colors.transparent,
                 hoverColor: Colors.transparent,
                 onTap: () {
-                  launchUrl(Uri.parse(getTranslatedText('https://ko-fi.com/LaLaLauncher', 'https://afdian.net/a/LaLaLauncher')));
+                  launchUrl(Uri.parse('https://ko-fi.com/LaLaLauncher'));
                 },
                 child: Text(
-                  getTranslatedText('Support me', '电我牛牛'),
+                  AppLocalizations.of(context)!.supportMe,
                   style: const TextStyle(color: Colors.grey, fontSize: 15),
                 ),
               ),
@@ -344,47 +345,24 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
     return AlertDialog(
       backgroundColor: Theme.of(context).primaryColor,
       title: Center(
-        child: Text(newVersionAvailable
-            ? getTranslatedText('🔥 New Version ${widget.latestVersion} available!', '🔥 新版本 ${widget.latestVersion} 可更新！')
-            : getTranslatedText('🎉 Already up to date', '🎉 已是最新版本')),
+        child: Text(newVersionAvailable ? AppLocalizations.of(context)!.newVersion(widget.latestVersion) : AppLocalizations.of(context)!.upToDate),
       ),
       titleTextStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
       content: SizedBox(
-        height: 250,
+        height: 200,
         width: 400,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              getTranslatedText("Download Address:", "下载地址:"),
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
-            ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 50),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(width: 60),
-                Text(getTranslatedText("Chinese Users:", "中国用户:"), style: const TextStyle(fontSize: 20)),
-                const SizedBox(width: 30),
-                SizedBox(
-                  height: 40,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00D3C4),
-                    ),
-                    child: const Text("BiliBili", style: TextStyle(fontSize: 20)),
-                    onPressed: () {
-                      launchUrl(Uri.parse('https://www.bilibili.com/read/cv27455416'));
-                    },
-                  ),
+                Text(
+                  AppLocalizations.of(context)!.downloadAddress,
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                const SizedBox(width: 60),
-                Text(getTranslatedText("Other Users:    ", "其他用户:"), style: const TextStyle(fontSize: 20)),
-                const SizedBox(width: 30),
+                const SizedBox(width: 20),
                 SizedBox(
                   height: 40,
                   child: ElevatedButton(
@@ -407,7 +385,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF00D3C4),
                   ),
-                  child: Text(getTranslatedText("OK", "确定"), style: const TextStyle(fontSize: 20)),
+                  child: Text(AppLocalizations.of(context)!.ok, style: const TextStyle(fontSize: 20)),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },

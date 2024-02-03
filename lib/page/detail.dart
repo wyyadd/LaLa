@@ -3,9 +3,10 @@ import '../util/game_launcher.dart';
 import '../util/language.dart';
 import '../util/server.dart';
 import '../util/storage.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DetailPage extends StatefulWidget {
   final OnlineGame game;
@@ -68,7 +69,7 @@ class _DetailPageState extends State<DetailPage> {
                   if (widget.game.specialNotes.isNotEmpty) const SizedBox(width: 40),
                   Flexible(
                     child: Text(
-                      getTranslatedText(widget.game.name, widget.game.nameZh),
+                      getGameName(widget.game.name, widget.game.nameZh),
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                       textAlign: TextAlign.center,
                     ),
@@ -78,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
                       onPressed: () {
                         launchUrl(Uri.parse(widget.game.specialNotes));
                       },
-                      tooltip: getTranslatedText("Special Notes", "特别提醒"),
+                      tooltip: AppLocalizations.of(context)!.specialNotes,
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       hoverColor: Colors.transparent,
@@ -125,7 +126,7 @@ class _DetailPageState extends State<DetailPage> {
                         width: 30,
                         child: CircularProgressIndicator(color: Colors.white),
                       )
-                    : Text(getTranslatedText('Launch', '启动')),
+                    : Text(AppLocalizations.of(context)!.launch),
               ),
             ),
           ],

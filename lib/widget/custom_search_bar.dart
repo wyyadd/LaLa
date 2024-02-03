@@ -1,5 +1,5 @@
-import '../util/language.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomSearchBar extends StatefulWidget {
   final ValueChanged<String> updateSearchGames;
@@ -22,7 +22,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
           return SearchBar(
             controller: controller,
             leading: const Icon(Icons.search, color: Colors.grey),
-            hintText: getTranslatedText('Search', '搜索'),
+            hintText: AppLocalizations.of(context)!.search,
             hintStyle: const MaterialStatePropertyAll<TextStyle>(TextStyle(color: Colors.grey)),
             backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xFF2B2E63)),
             overlayColor: const MaterialStatePropertyAll<Color>(Color(0xFF494E86)),

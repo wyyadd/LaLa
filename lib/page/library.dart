@@ -1,12 +1,13 @@
+import 'dart:io';
 import 'detail.dart';
 import '../util/dto.dart';
 import '../util/language.dart';
 import '../util/storage.dart';
 import '../util/game_launcher.dart';
 import '../widget/custom_page_route.dart';
-import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 final GlobalKey<NavigatorState> navLibraryKey = GlobalKey<NavigatorState>();
 
@@ -33,7 +34,7 @@ class _LibraryPageState extends State<LibraryPage> {
           child: widget.libraryGames.isEmpty
               ? Center(
                   child: Text(
-                  getTranslatedText("The game library is empty.\nSearch and add your favorites!", '游戏库为空，\n搜索并添加您喜欢的游戏吧！'),
+                  AppLocalizations.of(context)!.libraryEmpty,
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                   textAlign: TextAlign.center,
                 ))
@@ -131,7 +132,7 @@ class _LibraryPageState extends State<LibraryPage> {
                                           await launchGame(context, (game as CustomGame).trainerPath, game.appId, () {}, true);
                                         }
                                       },
-                                      child: Text(getTranslatedText('Launch', '启动')),
+                                      child: Text(AppLocalizations.of(context)!.launch),
                                     ),
                                   ),
                                   const SizedBox(height: 25),
@@ -143,7 +144,7 @@ class _LibraryPageState extends State<LibraryPage> {
                             width: 220,
                             padding: const EdgeInsets.symmetric(vertical: 10.0),
                             child: Text(
-                              game is OnlineGame ? getTranslatedText(game.name, game.nameZh) : game.name,
+                              game is OnlineGame ? getGameName(game.name, game.nameZh) : game.name,
                               textAlign: TextAlign.center,
                             ),
                           ),
