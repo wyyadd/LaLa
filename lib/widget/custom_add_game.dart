@@ -1,8 +1,8 @@
-import '../util/dto.dart';
-import '../util/language.dart';
 import 'dart:math';
+import '../util/dto.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 typedef UpdateLibraryFunction = void Function(Game game, bool switchTab, bool showBackButton);
 
@@ -38,7 +38,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                child: Text(getTranslatedText('Add Trainers', '添加修改器'), style: const TextStyle(color: Colors.grey)),
+                child: Text(AppLocalizations.of(context)!.addTrainers, style: const TextStyle(color: Colors.grey)),
               ),
               const Spacer(),
               IconButton(
@@ -62,7 +62,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(getTranslatedText('Game Name:', ' 游戏名称:  '), style: const TextStyle(fontSize: 15)),
+                    Text(AppLocalizations.of(context)!.gameName, style: const TextStyle(fontSize: 15)),
                     SizedBox(
                       width: 150,
                       child: TextField(
@@ -81,7 +81,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(getTranslatedText('Trainer Path:', '修改器路径:'), style: const TextStyle(fontSize: 15)),
+                    Text(AppLocalizations.of(context)!.trainerPath, style: const TextStyle(fontSize: 15)),
                     SizedBox(
                       height: 40,
                       width: 150,
@@ -100,7 +100,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                                 }
                               }
                             : null,
-                        child: Text(getTranslatedText('Select', '选择')),
+                        child: Text(AppLocalizations.of(context)!.select),
                       ),
                     ),
                   ],
@@ -110,7 +110,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(getTranslatedText('Game Cover:\n  (Optional)', ' 游戏封面:   \n    (可选)'), style: const TextStyle(fontSize: 15)),
+                    Text(AppLocalizations.of(context)!.gameCover, style: const TextStyle(fontSize: 15)),
                     SizedBox(
                       height: 40,
                       width: 150,
@@ -128,7 +128,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                                 }
                               }
                             : null,
-                        child: Text(getTranslatedText('Select', '选择')),
+                        child: Text(AppLocalizations.of(context)!.select),
                       ),
                     ),
                   ],
@@ -156,7 +156,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                             backgroundColor: const Color(0xFF2E3466),
                             content: Center(
                               child: Text(
-                                getTranslatedText('Trainer added successfully', '修改器添加成功'),
+                                AppLocalizations.of(context)!.trainerAdded,
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),
@@ -165,7 +165,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                         Navigator.of(context).pop();
                       }
                     },
-                    child: Text(getTranslatedText('Save', '保存')),
+                    child: Text(AppLocalizations.of(context)!.save),
                   ),
                 ),
               ],

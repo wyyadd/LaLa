@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'dto.dart';
 import 'dart:convert';
+import 'language.dart';
 import 'file_system.dart';
 import 'game_launcher.dart';
-import 'language.dart';
 import 'package:flutter/material.dart';
 import 'package:synchronized/synchronized.dart';
 import 'package:path_provider/path_provider.dart';

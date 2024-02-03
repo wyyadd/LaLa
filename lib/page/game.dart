@@ -4,11 +4,11 @@ import '../util/language.dart';
 import '../util/storage.dart';
 import '../widget/custom_page_route.dart';
 import '../widget/custom_add_game.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 final GlobalKey<NavigatorState> navGameKey = GlobalKey<NavigatorState>();
-
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key, required this.searchedGames, required this.updateLibraryGames, this.showCircularIndicator});
@@ -36,7 +36,7 @@ class _GamePageState extends State<GamePage> {
                     : widget.searchedGames.isEmpty
                         ? Center(
                             child: Text(
-                            getTranslatedText('Oops, no results found. Try different keywords!', '抱歉，没有找到相关结果。试试其他关键词吧！'),
+                            AppLocalizations.of(context)!.notFound,
                             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                           ))
                         : SingleChildScrollView(
@@ -84,7 +84,7 @@ class _GamePageState extends State<GamePage> {
                                                     ),
                                                   );
                                                 },
-                                                child: Text(getTranslatedText('Launch', '启动')),
+                                                child: Text(AppLocalizations.of(context)!.launch),
                                               ),
                                             ),
                                             const SizedBox(height: 25),
@@ -95,7 +95,7 @@ class _GamePageState extends State<GamePage> {
                                     Container(
                                       width: 160,
                                       padding: const EdgeInsets.symmetric(vertical: 10.0),
-                                      child: Text(getTranslatedText(game.name, game.nameZh), textAlign: TextAlign.center),
+                                      child: Text(getGameName(game.name, game.nameZh), textAlign: TextAlign.center),
                                     ),
                                   ],
                                 );

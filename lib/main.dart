@@ -1,15 +1,16 @@
 import 'page/game.dart';
 import 'page/library.dart';
 import 'util/dto.dart';
-import 'util/game_launcher.dart';
-import 'util/language.dart';
 import 'util/server.dart';
 import 'util/storage.dart';
+import 'util/language.dart';
+import 'util/game_launcher.dart';
 import 'widget/custom_add_game.dart';
 import 'widget/custom_search_bar.dart';
 import 'widget/custom_setting_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,14 +22,34 @@ void main(List<String> args) async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  static setLocal(BuildContext context, String local) {
+    context.findAncestorStateOfType<_MyAppState>()?._setLocale(local);
+  }
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('en');
+
+  void _setLocale(String locale) {
+    setState(() {
+      _locale = Locale(locale);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'LaLa Trainer Launcher',
+      title: 'LaLa Trainers Launcher',
+      locale: _locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         brightness: Brightness.dark,
         primaryColor: const Color(0xFF181E42),
@@ -48,10 +69,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTickerProviderStateMixin {
   late final TabController tabController;
-  List<Tab> tabs = <Tab>[
-    Tab(text: getTranslatedText('Library', '库')),
-    Tab(text: getTranslatedText('Game', '游戏')),
-  ];
+  static const int tabLength = 2;
   bool showBackButton = false;
   String latestVersion = "";
 
@@ -66,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     super.initState();
     windowManager.addListener(this);
     windowManager.setPreventClose(true).then((value) => setState(() {}));
-    tabController = TabController(length: tabs.length, vsync: this);
+    tabController = TabController(length: tabLength, vsync: this);
     _loadConfig();
     _loadLocalGames();
   }
@@ -112,13 +130,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   }
 
   void updateLanguage(String newLanguage) {
-    setState(() {
-      selectedLanguage = newLanguage;
-      tabs = <Tab>[
-        Tab(text: getTranslatedText('Library', '库')),
-        Tab(text: getTranslatedText('Game', '游戏')),
-      ];
-    });
+    selectedLanguage = newLanguage;
+    MyApp.setLocal(context, languageToLocale(selectedLanguage));
   }
 
   void updateBackButton() {
@@ -183,7 +196,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: tabs.length,
+      length: tabLength,
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
@@ -216,7 +229,10 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                 TabBar(
                   controller: tabController,
                   isScrollable: true,
-                  tabs: tabs,
+                  tabs: <Tab>[
+                    Tab(text: AppLocalizations.of(context)!.library),
+                    Tab(text: AppLocalizations.of(context)!.game),
+                  ],
                 ),
                 const Spacer(),
                 CustomSearchBar(updateSearchGames: updateSearchGames),
@@ -244,8 +260,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (BuildContext context) =>
-                          CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
+                      builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
                     );
                   },
                 ),
