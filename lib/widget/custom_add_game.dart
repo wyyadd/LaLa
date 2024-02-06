@@ -136,7 +136,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                 const SizedBox(height: 35),
                 SizedBox(
                   height: 40,
-                  width: 100,
+                  width: 110,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00D3C4),

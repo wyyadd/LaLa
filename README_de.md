@@ -11,8 +11,6 @@
     <img src="https://dcbadge.vercel.app/api/server/5vpz2V3wB9?style=flat-square&compact=true">
   </div>
   Ein kostenloser und plattformübergreifender Trainer-Launcher zur Verbesserung Ihres Spielerlebnisses🤗.
-  <br><br>
-  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a> - <a href="./README_de.md">German</a></span>
 </div>
 
 # 👀 Screenshots
