@@ -12,7 +12,7 @@
   </div>
   Ein kostenloser und plattformübergreifender Trainer-Launcher zur Verbesserung Ihres Spielerlebnisses🤗.
   <br><br>
-  <span style="font-size: 16px;"><a href="./README.md">English</a> - <a href="./README_zh.md">简体中文</a></span>
+  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a> - <a href="./README_de.md">German</a></span>
 </div>
 
 # 👀 Screenshots
