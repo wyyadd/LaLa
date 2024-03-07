@@ -68,7 +68,7 @@ For user who uses [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.Ste
 LaLa Trainers Launcher is an open-source software developed using Flutter. Any security warning you encounter during installation is a false positive from your system. You can safely proceed with the installation.
 
 ### Is the trainers downloaded by LaLa Trainers Launcher safe?
-Most of the trainers used by LaLa Trainers Launcher are sourced from [**Fling Trainers**](https://flingtrainer.com), and a few are from [**open-source cheat tables**](https://github.com/wyyadd/trainers) that I've collected.   
+All of the trainers used by LaLa Trainers Launcher are sourced from [**Fling Trainers**](https://flingtrainer.com).
 While every effort is made to ensure their safety, please use them **responsibly**, and be aware that the use of trainers can carry risks.
 
 ### Where is LaLa Trainers Launcher's cache data stored?
