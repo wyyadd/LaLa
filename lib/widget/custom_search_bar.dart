@@ -23,10 +23,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
             controller: controller,
             leading: const Icon(Icons.search, color: Colors.grey),
             hintText: AppLocalizations.of(context)!.search,
-            hintStyle: const MaterialStatePropertyAll<TextStyle>(TextStyle(color: Colors.grey)),
-            backgroundColor: const MaterialStatePropertyAll<Color>(Color(0xFF2B2E63)),
-            overlayColor: const MaterialStatePropertyAll<Color>(Color(0xFF494E86)),
-            padding: const MaterialStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
+            hintStyle: const WidgetStatePropertyAll<TextStyle>(TextStyle(color: Colors.grey)),
+            backgroundColor: const WidgetStatePropertyAll<Color>(Color(0xFF2B2E63)),
+            overlayColor: const WidgetStatePropertyAll<Color>(Color(0xFF494E86)),
+            padding: const WidgetStatePropertyAll<EdgeInsets>(EdgeInsets.symmetric(horizontal: 16.0)),
             onSubmitted: (prompt) {
               prompt = prompt.trim();
               if (prompt.isNotEmpty) {
