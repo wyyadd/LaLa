@@ -1,13 +1,15 @@
-import 'dart:io';
-import 'dto.dart';
 import 'dart:convert';
-import 'language.dart';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:synchronized/synchronized.dart';
+
+import 'dto.dart';
 import 'file_system.dart';
 import 'game_launcher.dart';
-import 'package:flutter/material.dart';
-import 'package:synchronized/synchronized.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'language.dart';
 
 const String libraryFileName = 'library.json';
 const String hotListFileName = 'hottest.json';
@@ -84,7 +86,6 @@ class LocalStorage {
     String config = jsonEncode({
       'language': selectedLanguage,
       'custom_steam_path': customSteamPath,
-      'mac_wine_prefix': macWinePrefix,
     });
     await _configFileLock.synchronized(() async {
       await file.writeAsString(config);

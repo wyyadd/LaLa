@@ -22,8 +22,6 @@
   "setSteamPath": "设置Steam路径",
   "set": "设置",
   "steamPathSet": "Steam路径设置成功",
-  "setWine": "设置WinePrefix",
-  "wineSet": "WinePrefix设置成功",
   "checkUpdate": "检查更新",
   "check": "检查",
   "supportMe": "支持我",

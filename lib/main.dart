@@ -1,20 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:window_manager/window_manager.dart';
+
 import 'page/game.dart';
 import 'page/library.dart';
 import 'util/dto.dart';
+import 'util/game_launcher.dart';
+import 'util/language.dart';
 import 'util/server.dart';
 import 'util/storage.dart';
-import 'util/language.dart';
-import 'util/game_launcher.dart';
 import 'widget/custom_add_game.dart';
 import 'widget/custom_search_bar.dart';
 import 'widget/custom_setting_dialog.dart';
-import 'package:flutter/material.dart';
-import 'package:window_manager/window_manager.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   localStorage.initCacheManager();
+  // TODO: steam deck gaming mode
   if (args.contains("--full-screen")) {
     await windowManager.ensureInitialized();
     windowManager.setFullScreen(true);
@@ -148,7 +150,6 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
         updateLanguage(language);
       }
       customSteamPath = config['custom_steam_path'] ?? "";
-      macWinePrefix = config['mac_wine_prefix'] ?? "";
     }
     configLoaded = true;
     latestVersion = await server.getLatestVersion();
