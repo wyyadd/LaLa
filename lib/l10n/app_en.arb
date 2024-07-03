@@ -22,8 +22,6 @@
   "setSteamPath": "Set Steam Path",
   "set": "Set",
   "steamPathSet": "Steam path set successfully",
-  "setWine": "Set WinePrefix",
-  "wineSet": "WinePrefix set successfully",
   "checkUpdate": "Check Update",
   "check": "Check",
   "supportMe": "Support me",

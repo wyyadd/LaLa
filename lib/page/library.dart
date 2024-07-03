@@ -1,13 +1,15 @@
 import 'dart:io';
-import 'detail.dart';
+
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../util/dto.dart';
+import '../util/game_launcher.dart';
 import '../util/language.dart';
 import '../util/storage.dart';
-import '../util/game_launcher.dart';
 import '../widget/custom_page_route.dart';
-import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'detail.dart';
 
 final GlobalKey<NavigatorState> navLibraryKey = GlobalKey<NavigatorState>();
 

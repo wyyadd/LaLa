@@ -1,12 +1,14 @@
 import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../util/game_launcher.dart';
 import '../util/language.dart';
 import '../util/storage.dart';
-import '../util/game_launcher.dart';
-import 'package:flutter/material.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomSettingDialog extends StatefulWidget {
   const CustomSettingDialog({super.key, required this.updateLanguage, required this.latestVersion});
@@ -178,55 +180,6 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                                 content: Center(
                                   child: Text(
                                     AppLocalizations.of(context)!.steamPathSet,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            );
-                            Navigator.of(context).pop();
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(height: 5),
-          ],
-          if (Platform.isMacOS) ...[
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text(
-                    AppLocalizations.of(context)!.setWine,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00D3C4),
-                      ),
-                      child: Text(AppLocalizations.of(context)!.set),
-                      onPressed: () {
-                        FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
-                          debugPrint('$selectedDirectory');
-                          if (selectedDirectory != null) {
-                            macWinePrefix = selectedDirectory;
-                            localStorage.writeConfig();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: const Duration(seconds: 1),
-                                backgroundColor: const Color(0xFF2E3466),
-                                content: Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.wineSet,
                                     style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
