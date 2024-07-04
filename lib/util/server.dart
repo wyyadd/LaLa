@@ -12,6 +12,7 @@ class Server {
   static const String searchApi = 'https://api.aironheart.com/search';
   static const String versionApi = 'https://api.aironheart.com/version';
   static const String updateApi = 'https://api.aironheart.com/update';
+  static const String batchApi = 'https://api.aironheart.com/batch';
 
   Future<List<Game>> getHotList() async {
     try {
@@ -71,6 +72,28 @@ class Server {
     } catch (e) {
       debugPrint(e.toString());
       return null;
+    }
+  }
+
+  Future<List<Game>> getBatchGames(List<int> gameIds) async {
+    try {
+      final response = await http.post(
+        Uri.parse(batchApi),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({'gameIds': gameIds}),
+      );
+      if (response.statusCode == 200 && response.body.isNotEmpty) {
+        List<Game> parsedGames =
+            (jsonDecode(response.body) as List<dynamic>).map((dynamic gameJson) => OnlineGame.fromJson(gameJson as Map<String, dynamic>)).toList();
+        return parsedGames;
+      } else {
+        return [];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
     }
   }
 }

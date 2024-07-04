@@ -44,6 +44,7 @@ dependencies:
   package_info_plus: ^8.0.0
   file_picker: ^8.0.3
   synchronized: ^3.1.0
+  vdf: ^1.1.0
 
 dependency_overrides:
   flutter_cache_manager:

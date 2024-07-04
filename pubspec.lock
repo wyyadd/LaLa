@@ -523,6 +523,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.4.0"
+  vdf:
+    dependency: "direct main"
+    description:
+      name: vdf
+      sha256: "3c3de152e0914b1842aa4c7e552e4b5f3234dfec0bcd0c1c672420339887390a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   vector_math:
     dependency: transitive
     description:
