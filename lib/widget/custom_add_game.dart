@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../util/dto.dart';
+import '../util/widget.dart';
 
-typedef UpdateLibraryFunction = void Function(Game game, bool switchTab, bool showBackButton);
+typedef UpdateLibraryFunction = void Function(List<Game> game, bool switchTab, bool showBackButton);
 
 class CustomAddGame extends StatefulWidget {
   const CustomAddGame({super.key, required this.updateLibraryGames});
@@ -151,19 +152,8 @@ class _CustomAddGameState extends State<CustomAddGame> {
                           coverImagePath: coverImagePath ?? "",
                           trainerPath: trainerPath!,
                         );
-                        widget.updateLibraryGames(game, false, false);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            duration: const Duration(seconds: 1),
-                            backgroundColor: const Color(0xFF2E3466),
-                            content: Center(
-                              child: Text(
-                                AppLocalizations.of(context)!.trainerAdded,
-                                style: const TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        );
+                        widget.updateLibraryGames([game], false, false);
+                        showSnakeBar(context: context, message: AppLocalizations.of(context)!.trainerAdded);
                         Navigator.of(context).pop();
                       }
                     },

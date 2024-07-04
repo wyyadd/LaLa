@@ -13,14 +13,16 @@ import 'widget/custom_add_game.dart';
 import 'widget/custom_search_bar.dart';
 import 'widget/custom_setting_dialog.dart';
 
-void main(List<String> args) async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   localStorage.initCacheManager();
+  // TODO: proton path not found update
   // TODO: steam deck gaming mode
-  if (args.contains("--full-screen")) {
-    await windowManager.ensureInitialized();
-    windowManager.setFullScreen(true);
-  }
+  // TODO: new feature
+  // TODO: sd card read
+  // 1. game: sd, proton: local
+  // 2. game: sd, proton: sd
+  // 3. gameL local, proton: sd
   runApp(const MyApp());
 }
 
@@ -110,13 +112,15 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
     });
   }
 
-  void updateLibraryGames(Game game, bool switchTab, bool showBackButton) {
-    final existingGameIndex = libraryGames.indexWhere((existingGame) => existingGame.id == game.id);
-    if (existingGameIndex != -1) {
-      libraryGames.removeAt(existingGameIndex);
-      libraryGames.insert(0, game);
-    } else {
-      libraryGames.insert(0, game);
+  void updateLibraryGames(List<Game> games, bool switchTab, bool showBackButton) {
+    for (var game in games) {
+      final existingGameIndex = libraryGames.indexWhere((existingGame) => existingGame.id == game.id);
+      if (existingGameIndex != -1) {
+        libraryGames.removeAt(existingGameIndex);
+        libraryGames.insert(0, game);
+      } else {
+        libraryGames.insert(0, game);
+      }
     }
     // save game library
     localStorage.writeGameList(libraryGames, libraryFileName);
@@ -261,7 +265,11 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener, SingleTick
                     showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (BuildContext context) => CustomSettingDialog(updateLanguage: updateLanguage, latestVersion: latestVersion),
+                      builder: (BuildContext context) => CustomSettingDialog(
+                        updateLanguage: updateLanguage,
+                        latestVersion: latestVersion,
+                        updateLibraryGames: updateLibraryGames,
+                      ),
                     );
                   },
                 ),

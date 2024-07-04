@@ -7,14 +7,18 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../util/game_launcher.dart';
+import '../util/game_loader.dart';
 import '../util/language.dart';
 import '../util/storage.dart';
+import '../util/widget.dart';
+import 'custom_add_game.dart';
 
 class CustomSettingDialog extends StatefulWidget {
-  const CustomSettingDialog({super.key, required this.updateLanguage, required this.latestVersion});
+  const CustomSettingDialog({super.key, required this.updateLanguage, required this.latestVersion, required this.updateLibraryGames});
 
   final ValueChanged<String> updateLanguage;
   final String latestVersion;
+  final UpdateLibraryFunction updateLibraryGames;
 
   @override
   State<CustomSettingDialog> createState() => _CustomSettingDialogState();
@@ -43,11 +47,12 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
 
   Widget dialogContent(BuildContext context) {
     return SizedBox(
-      height: 300,
-      width: 310,
+      height: 350,
+      width: 350,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Setting -- Quit Button
           Row(
             children: [
               Padding(
@@ -67,135 +72,96 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
               ),
             ],
           ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  AppLocalizations.of(context)!.language,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: SizedBox(
-                  width: 100,
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    value: selectedLanguage,
-                    dropdownColor: const Color(0xFF2E3466),
-                    focusColor: Colors.transparent,
-                    onChanged: (String? newValue) {
-                      if (newValue != null && newValue != selectedLanguage) {
-                        setState(() {
-                          widget.updateLanguage(newValue);
-                        });
-                        localStorage.writeConfig();
-                      }
-                    },
-                    items: languageOptions.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Center(child: Text(value)),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
+          // Language
+          _rowWidget(
+            AppLocalizations.of(context)!.language,
+            DropdownButton<String>(
+              isExpanded: true,
+              value: selectedLanguage,
+              dropdownColor: const Color(0xFF2E3466),
+              focusColor: Colors.transparent,
+              onChanged: (String? newValue) {
+                if (newValue != null && newValue != selectedLanguage) {
+                  setState(() {
+                    widget.updateLanguage(newValue);
+                  });
+                  localStorage.writeConfig();
+                }
+              },
+              items: languageOptions.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Center(child: Text(value)),
+                );
+              }).toList(),
+            ),
           ),
           const Divider(height: 5),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: Text(
-                  AppLocalizations.of(context)!.clearCache,
-                  style: const TextStyle(fontSize: 20),
-                ),
+          // Clear Cache
+          _rowWidget(
+            AppLocalizations.of(context)!.clearCache,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00D3C4),
               ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
-                child: SizedBox(
-                  width: 100,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00D3C4),
-                    ),
-                    child: Text(AppLocalizations.of(context)!.clear),
-                    onPressed: () {
-                      cacheManager.emptyCache();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: const Duration(seconds: 1),
-                          backgroundColor: const Color(0xFF2E3466),
-                          content: Center(
-                            child: Text(
-                              AppLocalizations.of(context)!.cacheCleared,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      );
+              child: Text(AppLocalizations.of(context)!.clear),
+              onPressed: () {
+                cacheManager.emptyCache();
+                showSnakeBar(context: context, message: AppLocalizations.of(context)!.cacheCleared);
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          const Divider(height: 5),
+          if (Platform.isLinux || Platform.isMacOS) ...[
+            // Set steam path
+            _rowWidget(
+              AppLocalizations.of(context)!.setSteamPath,
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF00D3C4),
+                ),
+                child: Text(AppLocalizations.of(context)!.set),
+                onPressed: () {
+                  FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                    debugPrint('$selectedDirectory');
+                    if (selectedDirectory != null) {
+                      customSteamPath = selectedDirectory;
+                      localStorage.writeConfig();
+                      showSnakeBar(context: context, message: AppLocalizations.of(context)!.steamPathSet);
                       Navigator.of(context).pop();
-                    },
-                  ),
-                ),
+                    }
+                  });
+                },
               ),
-            ],
-          ),
-          const Divider(height: 5),
-          if (Platform.isLinux) ...[
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text(
-                    AppLocalizations.of(context)!.setSteamPath,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF00D3C4),
-                      ),
-                      child: Text(AppLocalizations.of(context)!.set),
-                      onPressed: () {
-                        FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
-                          debugPrint('$selectedDirectory');
-                          if (selectedDirectory != null) {
-                            customSteamPath = selectedDirectory;
-                            localStorage.writeConfig();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: const Duration(seconds: 1),
-                                backgroundColor: const Color(0xFF2E3466),
-                                content: Center(
-                                  child: Text(
-                                    AppLocalizations.of(context)!.steamPathSet,
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            );
-                            Navigator.of(context).pop();
-                          }
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
             ),
             const Divider(height: 5),
           ],
+          // Load local games
+          _rowWidget(
+            AppLocalizations.of(context)!.loadGames,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00D3C4),
+              ),
+              child: Text(AppLocalizations.of(context)!.load),
+              onPressed: () async {
+                String message = AppLocalizations.of(context)!.gameLoaded;
+                try {
+                  var games = await getLocalGames(context);
+                  widget.updateLibraryGames(games, false, false);
+                } catch (e) {
+                  message = e.toString();
+                  debugPrint(message);
+                }
+                if (!context.mounted) return;
+                showSnakeBar(context: context, message: message, time: 2);
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          const Divider(height: 5),
+          // check update
           Row(
             children: [
               Padding(
@@ -252,6 +218,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
             ],
           ),
           const Spacer(),
+          // Bottom: github--version--support
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -290,6 +257,28 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
           const SizedBox(height: 10),
         ],
       ),
+    );
+  }
+
+  Widget _rowWidget(String text, Widget element) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: Text(
+            text,
+            style: const TextStyle(fontSize: 20),
+          ),
+        ),
+        const Spacer(),
+        Padding(
+          padding: const EdgeInsets.only(right: 20),
+          child: SizedBox(
+            width: 100,
+            child: element,
+          ),
+        ),
+      ],
     );
   }
 

@@ -40,13 +40,14 @@ Future<void> _launchGame(BuildContext context, String trainerPath, int appId, Vo
   }
   if (Platform.isLinux) {
     String home = Platform.environment['HOME']!;
-    String steamPath = customSteamPath.isEmpty ? '$home/.local/share/Steam' : customSteamPath;
-    if (!await _dirExist('$steamPath/steamapps')) {
+    String defaultPath = "$home/.local/share/Steam";
+    String steamPath = customSteamPath.isEmpty ? defaultPath : customSteamPath;
+    if (!await dirExist('$steamPath/steamapps')) {
       if (!context.mounted) return;
-      throw Exception(AppLocalizations.of(context)!.steamPathNotFound(home, steamPath));
+      throw Exception(AppLocalizations.of(context)!.steamPathNotFound(defaultPath, steamPath));
     }
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
-    if (isCustomTrainer || !await _dirExist(gamePath)) {
+    if (isCustomTrainer || !await dirExist(gamePath)) {
       int? nonSteamGameId = _getAppIdFromPS();
       if (nonSteamGameId == null) {
         if (!context.mounted) return;
@@ -103,7 +104,7 @@ Future<String> _getProtonPath(BuildContext context, String gamePath) async {
     if (!context.mounted) return "";
     throw Exception(AppLocalizations.of(context)!.protonPathNotFound("Null"));
   }
-  if (!await _dirExist(protonPath) && context.mounted) {
+  if (!await dirExist(protonPath) && context.mounted) {
     throw Exception(AppLocalizations.of(context)!.protonPathNotFound(protonPath));
   }
   return '$protonPath/proton';
@@ -129,7 +130,7 @@ int? _getAppIdFromPS() {
   return null;
 }
 
-Future<bool> _dirExist(String path) async {
+Future<bool> dirExist(String path) async {
   return await Directory(path).exists();
 }
 

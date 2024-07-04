@@ -50,7 +50,7 @@ class _GamePageState extends State<GamePage> {
                                   children: [
                                     InkWell(
                                       onTap: () {
-                                        widget.updateLibraryGames(game, true, false);
+                                        widget.updateLibraryGames([game], true, false);
                                       },
                                       onHover: (isSelected) {
                                         setState(() {
@@ -78,7 +78,7 @@ class _GamePageState extends State<GamePage> {
                                                   backgroundColor: const Color(0xFF00D3C4),
                                                 ),
                                                 onPressed: () {
-                                                  widget.updateLibraryGames(game, false, true);
+                                                  widget.updateLibraryGames([game], false, true);
                                                   navGameKey.currentState!.push(
                                                     CustomPageRoute(
                                                       child: DetailPage(game: game as OnlineGame, runTrainer: true),
