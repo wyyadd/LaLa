@@ -57,6 +57,7 @@ You can download prebuilt binaries directly from [**GitHub releases**](https://g
 The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftware/Proton) to run trainers. To use trainers, you must:
 - Install Steam and set up Proton.
 - Have the game already installed.
+- Make sure the game uses Proton.
 
 For user who uses [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.Steam), you also need to:
 - Add AppImage LaLa as a Non-Steam game.
