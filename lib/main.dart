@@ -16,7 +16,7 @@ import 'widget/custom_setting_dialog.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   localStorage.initCacheManager();
-  // TODO: proton path not found update
+  // TODO: Readme Update (don't forget ch and de)
   // TODO: steam deck gaming mode
   // TODO: new feature
   // TODO: sd card read
