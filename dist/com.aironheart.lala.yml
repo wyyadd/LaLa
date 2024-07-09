@@ -7,11 +7,14 @@ rename-icon: 'LaLa'
 rename-desktop-file: 'lala.desktop'
 finish-args:
   - --share=ipc
-  - --socket=fallback-x11
   - --socket=wayland
+  - --socket=fallback-x11
   - --device=dri
   - --share=network
   - --filesystem=home
+  - --filesystem=/mnt
+  - --filesystem=/media
+  - --filesystem=/run/media
   - --filesystem=~/.var/app/com.valvesoftware.Steam/
   - --talk-name=org.freedesktop.Flatpak
 modules:
