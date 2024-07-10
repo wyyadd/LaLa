@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -113,30 +111,28 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
             ),
           ),
           const Divider(height: 5),
-          if (Platform.isLinux || Platform.isMacOS) ...[
-            // Set steam path
-            _rowWidget(
-              AppLocalizations.of(context)!.setSteamPath,
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00D3C4),
-                ),
-                child: Text(AppLocalizations.of(context)!.set),
-                onPressed: () {
-                  FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
-                    debugPrint('$selectedDirectory');
-                    if (selectedDirectory != null) {
-                      customSteamPath = selectedDirectory;
-                      localStorage.writeConfig();
-                      showSnakeBar(context: context, message: AppLocalizations.of(context)!.steamPathSet);
-                      Navigator.of(context).pop();
-                    }
-                  });
-                },
+          // Set steam path
+          _rowWidget(
+            AppLocalizations.of(context)!.setSteamPath,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF00D3C4),
               ),
+              child: Text(AppLocalizations.of(context)!.set),
+              onPressed: () {
+                FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                  debugPrint('$selectedDirectory');
+                  if (selectedDirectory != null) {
+                    customSteamPath = selectedDirectory;
+                    localStorage.writeConfig();
+                    showSnakeBar(context: context, message: AppLocalizations.of(context)!.steamPathSet);
+                    Navigator.of(context).pop();
+                  }
+                });
+              },
             ),
-            const Divider(height: 5),
-          ],
+          ),
+          const Divider(height: 5),
           // Load local games
           _rowWidget(
             AppLocalizations.of(context)!.loadGames,
