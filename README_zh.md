@@ -24,7 +24,7 @@
 * Windows
 * Linux
 * Steam Deck
-* macOS (Beta)
+* macOS (Coming Soon)
 
 ## 💬 Discord
 交流与获取帮助🤗.
@@ -32,31 +32,44 @@
 [![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ 安装
-你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases) 或 [**BiliBili**](https://www.bilibili.com/read/cv27455416)下载安装包
+你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases)下载安装包。
 - 对于Windows用户，直接安装**exe**文件
-- 对于Linux用户，运行以下命令安装
+- 对于 **Linux** 和 **Steam deck** 用户, 运行以下命令之一进行安装。
+  - AppImage 版本
     ```bash
-    sudo dpkg -i LaLa_linux_amd64.deb
-    或者
-    sudo apt install ./LaLa_linux_amd64.deb
-    或者
-    flatpak install --user LaLa_linux_amd64.flatpak
-    或者
-    直接运行 LaLa_linux_amd64.AppImage
+    chmod +x LaLa_linux_amd64.AppImage && \
+    ./LaLa_linux_amd64.AppImage
     ```
-- 对于SteamDeck用户，运行以下命令安装
+  - Flatpak 版本
     ```bash
-    flatpak install --user LaLa_linux_amd64.flatpak
-    或者
-    直接运行 LaLa_linux_amd64.AppImage
+    flatpak install --user LaLa_linux_amd64.flatpak && \
+    flatpak run com.aironheart.lala
+    ```
+  - Binary 版本
+    ```bash
+    unzip LaLa_linux_amd64.zip -d destination_folder && \
+    chmod +x destination_folder/LaLa && \
+    ./destination_folder/LaLa
+    ```
+  - Deb 版本: 仅适用于基于Debian和Ubuntu的Linux系统 
+    ```bash
+    sudo dpkg -i LaLa_linux_amd64.deb && \
+    LaLa
     ```
 
 ## ⚠️ Linux和Steam Deck用户的注意事项
-LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运行修改器。要使用修改器，你必须:
-- 已安装Steam和Proton
+LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运行修改器。
+要使用修改器，你必须:
+- 安装Steam和[开启Proton](docs/enable_proton.md)
 - 已安装修改器对应的游戏
+- [确保游戏使用Proton](docs/enable_proton.md)
 
-对于使用[FlatPak Steam](https://flathub.org/apps/com.valvesoftware.Steam)的用户，你还需要:
+对于在**游戏模式**下使用LaLa的**Steam Deck**用户：
+- 请将LaLa添加为非Steam游戏。
+- **Flatpak LaLa**在游戏模式下不受支持。
+- 使用**Mouse Only**按钮布局以获得更好的体验。
+
+对于使用[FlatPak Steam](https://flathub.org/apps/com.valvesoftware.Steam)的用户，你需要:
 - 将AppImage LaLa添加为非Steam游戏
 - 使用```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run```作为LaLa的启动选项
 - 从Steam启动LaLa

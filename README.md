@@ -12,7 +12,7 @@
   </div>
   A free and cross-platform trainers launcher for enhancing your gaming experience🤗.  
   <br><br>
-  <span style="font-size: 16px;"><a href="./README_zh.md">简体中文</a> - <a href="./README_de.md">German</a></span>
+  <span style="font-size: 16px;"><a href="./README_zh.md">中文</a> - <a href="./README_de.md">German</a></span>
 </div>
 
 # 👀 Screenshots
@@ -26,7 +26,7 @@
 * Windows
 * Linux
 * Steam Deck
-* macOS (Beta)
+* MacOS (Coming Soon)
 
 ## 💬 Discord
 Feel free to ask and talk🤗.
@@ -34,32 +34,44 @@ Feel free to ask and talk🤗.
 [![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ Installation
-You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases) or [**BiliBili**](https://www.bilibili.com/read/cv27455416)
-- For Windows user, install **exe** file directly.
-- For Linux user, run following commands to install.
+You can download prebuilt binaries directly from [**GitHub releases**](https://github.com/wyyadd/LaLa/releases).
+- For **Windows** user, install **exe** file directly.
+- For **Linux** and **Steam deck** user, run one of the following commands to install.
+    - AppImage version
     ```bash
-    sudo dpkg -i LaLa_linux_amd64.deb
-    or
-    sudo apt install ./LaLa_linux_amd64.deb
-    or
-    flatpak install --user LaLa_linux_amd64.flatpak
-    or
-    run LaLa_linux_amd64.AppImage directly🥰
+    chmod +x LaLa_linux_amd64.AppImage && \
+    ./LaLa_linux_amd64.AppImage
     ```
-- For Steam Deck User, run following commands to install.
+    - Flatpak version
     ```bash
-    flatpak install --user LaLa_linux_amd64.flatpak
-    or
-    run LaLa_linux_amd64.AppImage directly🥰
+    flatpak install --user LaLa_linux_amd64.flatpak && \
+    flatpak run com.aironheart.lala
     ```
-
-## ⚠️ Important notice for Linux user
-The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftware/Proton) to run trainers. To use trainers, you must:
-- Install Steam and set up Proton.
+    - Binary version  
+    ```bash
+    unzip LaLa_linux_amd64.zip -d destination_folder && \
+    chmod +x destination_folder/LaLa && \
+    ./destination_folder/LaLa
+    ```
+    - Deb version: only for Debian-based and Ubuntu-based linux
+    ```bash
+    sudo dpkg -i LaLa_linux_amd64.deb && \
+    LaLa
+    ```
+    
+## ⚠️ Important notice for Linux and Steam Deck user
+The LaLa Launcher for Linux relies on [**Proton**](https://github.com/ValveSoftware/Proton) to run trainers.   
+To use trainers, you must:
+- Install Steam and [set up Proton](docs/enable_proton.md).
 - Have the game already installed.
-- Make sure the game uses Proton.
+- [Make sure the game uses Proton.](docs/enable_proton.md)
 
-For user who uses [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.Steam), you also need to:
+For **Steam Deck** users who use LaLa in **gaming mode**:
+- Please add LaLa as a non-steam game.
+- **Flatpak LaLa** is not supported for gaming mode.
+- Use **Mouse Only** button Layout for better experience.
+
+For users who use [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.Steam), you need to:
 - Add AppImage LaLa as a Non-Steam game.
 - Use ```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run``` as LaLa's launch options.
 - Open LaLa through steam.
