@@ -16,13 +16,6 @@ import 'widget/custom_setting_dialog.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   localStorage.initCacheManager();
-  // TODO: Readme Update (don't forget ch and de)
-  // TODO: steam deck gaming mode
-  // TODO: new feature
-  // TODO: sd card read
-  // 1. game: sd, proton: local
-  // 2. game: sd, proton: sd
-  // 3. gameL local, proton: sd
   runApp(const MyApp());
 }
 
