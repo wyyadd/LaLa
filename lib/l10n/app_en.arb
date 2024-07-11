@@ -28,7 +28,7 @@
   "ok": "OK",
   "newVersion": "\uD83D\uDD25 New Version {latestVersion} available!",
   "upToDate": "\uD83C\uDF89 Already up to date",
-  "downloadAddress": "Download Address:",
+  "downloadLink": "Download Link:",
   "protonPathNotFound": "Proton path not found.\n\nPlease ensure Proton is installed and the game uses Proton.\n\nCurrent Path: {protonPath}",
   "trainerPathNotFound": "Trainer path not found.\n\nCurrent Path: {trainerPath}",
   "steamPathNotFound": "Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: {steamPath}\n\nDefault Path: {defaultPath}",

@@ -28,7 +28,7 @@
   "ok": "确定",
   "newVersion": "\uD83D\uDD25 新版本 {latestVersion} 可更新！",
   "upToDate": "\uD83C\uDF89 已是最新版本",
-  "downloadAddress": "下载地址:",
+  "downloadLink": "下载地址:",
   "protonPathNotFound": "未找到Proton路径。\n\n请确认已安装Proton并且游戏使用proton。\n\n当前路径为: {protonPath}",
   "trainerPathNotFound": "未找到修改器路径。\n\n当前路径为: {trainerPath}",
   "steamPathNotFound": "未找到Steam路径。\n\n您可以在设置中指定路径。\n\n当前路径为: {steamPath}\n\n默认路径为: {defaultPath}",

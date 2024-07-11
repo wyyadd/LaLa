@@ -297,7 +297,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.downloadAddress,
+                  AppLocalizations.of(context)!.downloadLink,
                   style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
                 ),
                 const SizedBox(width: 20),
