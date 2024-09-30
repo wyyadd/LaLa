@@ -125,6 +125,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
                   if (selectedDirectory != null) {
                     customSteamPath = selectedDirectory;
                     localStorage.writeConfig();
+                    if (!context.mounted) return;
                     showSnakeBar(context: context, message: AppLocalizations.of(context)!.steamPathSet);
                     Navigator.of(context).pop();
                   }
