@@ -58,6 +58,10 @@ Future<void> _launchGame(BuildContext context, String trainerPath, int appId, Vo
         }
       } else {
         gamePath = '$steamPath/steamapps/compatdata/$nonSteamGameId';
+        if (!await dirExist(gamePath)) {
+          if (!context.mounted) return;
+          throw Exception(AppLocalizations.of(context)!.gamePathNotFound(gamePath));
+        }
       }
     }
 
