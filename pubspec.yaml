@@ -37,7 +37,7 @@ dependencies:
   file: ^7.0.0
   path: ^1.8.3
   path_provider: ^2.1.1
-  window_manager: ^0.3.6
+  window_manager: ^0.4.2
   cached_network_image: ^3.3.0
   flutter_cache_manager: ^3.3.2
   url_launcher: ^6.1.14
@@ -45,13 +45,6 @@ dependencies:
   file_picker: ^8.0.3
   synchronized: ^3.1.0
   vdf: ^1.1.0
-
-dependency_overrides:
-  flutter_cache_manager:
-    git:
-      url: https://github.com/wyyadd/flutter_cache_manager
-      ref: develop
-      path: flutter_cache_manager
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +55,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
