@@ -37,3 +37,25 @@ Future<List<Game>> getLocalGames(BuildContext context) async {
   final games = server.getBatchGames(appIds);
   return games;
 }
+
+Future<String> getSteamPath(BuildContext context, int appId) async {
+  String defaultPath = "${Platform.environment['HOME']!}/.local/share/Steam";
+  String steamPath = customSteamPath.isEmpty ? defaultPath : customSteamPath;
+  if (!await dirExist('$steamPath/steamapps')) {
+    if (!context.mounted) return "";
+    throw Exception(AppLocalizations.of(context)!.steamPathNotFound(defaultPath, steamPath));
+  }
+
+  final libraryFile = File('$steamPath/steamapps/libraryfolders.vdf');
+  if (!await libraryFile.exists()) {
+    return steamPath;
+  }
+
+  Map<String, dynamic> decoded = vdf.decode(await libraryFile.readAsString());
+  for (var location in (decoded["libraryfolders"] as Map<dynamic, dynamic>).values) {
+    if ((location["apps"] as Map<dynamic, dynamic>).containsKey(appId.toString())) {
+      return location["path"];
+    }
+  }
+  return steamPath;
+}
