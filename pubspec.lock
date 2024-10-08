@@ -101,10 +101,10 @@ packages:
     dependency: "direct main"
     description:
       name: file
-      sha256: "5fc22d7c25582e38ad9a8515372cd9a93834027aacf1801cf01164dac0ffa08c"
+      sha256: a3b4f84adafef897088c160faf7dfffb7696046cb13ae90b508c2cbc95d3b8d4
       url: "https://pub.dev"
     source: hosted
-    version: "7.0.0"
+    version: "7.0.1"
   file_picker:
     dependency: "direct main"
     description:
@@ -129,10 +129,11 @@ packages:
   flutter_cache_manager:
     dependency: "direct main"
     description:
-      name: flutter_cache_manager
-      sha256: "400b6592f16a4409a7f2bb929a9a7e38c72cceb8ffb99ee57bbf2cb2cecf8386"
-      url: "https://pub.dev"
-    source: hosted
+      path: flutter_cache_manager
+      ref: develop
+      resolved-ref: fe3d99ef0a9e541737f3ea1b77e06dc8c8f2d6d0
+      url: "https://github.com/wyyadd/flutter_cache_manager"
+    source: git
     version: "3.4.1"
   flutter_lints:
     dependency: "direct dev"
@@ -390,10 +391,10 @@ packages:
     dependency: transitive
     description:
       name: sqflite_android
-      sha256: "11821baf1d1bd3d71150d9b0d4c2e22cf680858c71add2113c919ca55cf9dc56"
+      sha256: "78f489aab276260cdd26676d2169446c7ecd3484bbd5fead4ca14f3ed4dd9ee3"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0-1"
+    version: "2.4.0"
   sqflite_common:
     dependency: transitive
     description:
@@ -406,18 +407,18 @@ packages:
     dependency: transitive
     description:
       name: sqflite_darwin
-      sha256: "5e325c925cbd63f27e0e538aed018a40852325e590b5d83165181e492d272f9b"
+      sha256: "769733dddf94622d5541c73e4ddc6aa7b252d865285914b6fcd54a63c4b4f027"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1-0"
+    version: "2.4.1-1"
   sqflite_platform_interface:
     dependency: transitive
     description:
       name: sqflite_platform_interface
-      sha256: b62ab81e1284341783222aefbbb44f984ebf4663d672ae10408c9a8ddab4bfb6
+      sha256: "8dd4515c7bdcae0a785b0062859336de775e8c65db81ae33dd5445f35be61920"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0-0"
+    version: "2.4.0"
   stack_trace:
     dependency: transitive
     description:
@@ -478,10 +479,10 @@ packages:
     dependency: "direct main"
     description:
       name: url_launcher
-      sha256: "21b704ce5fa560ea9f3b525b43601c678728ba46725bab9b01187b4831377ed3"
+      sha256: "9d06212b1362abc2f0f0d78e6f09f726608c74e3b9462e8368bb03314aa8d603"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.0"
+    version: "6.3.1"
   url_launcher_android:
     dependency: transitive
     description:
