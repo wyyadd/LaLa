@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'game_loader.dart';
+
 String customSteamPath = "";
 
 Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
@@ -39,13 +41,8 @@ Future<void> _launchGame(BuildContext context, String trainerPath, int appId, Vo
     throw Exception(AppLocalizations.of(context)!.trainerPathNotFound(trainerPath));
   }
   if (Platform.isLinux) {
-    String home = Platform.environment['HOME']!;
-    String defaultPath = "$home/.local/share/Steam";
-    String steamPath = customSteamPath.isEmpty ? defaultPath : customSteamPath;
-    if (!await dirExist('$steamPath/steamapps')) {
-      if (!context.mounted) return;
-      throw Exception(AppLocalizations.of(context)!.steamPathNotFound(defaultPath, steamPath));
-    }
+    if (!context.mounted) return;
+    String steamPath = await getSteamPath(context, appId);
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
     if (isCustomTrainer || !await dirExist(gamePath)) {
       int? nonSteamGameId = _getAppIdFromPS();
