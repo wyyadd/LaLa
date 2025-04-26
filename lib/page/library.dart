@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../l10n/app_localizations.dart';
 import '../util/dto.dart';
 import '../util/game_launcher.dart';
 import '../util/language.dart';
@@ -93,7 +93,7 @@ class _LibraryPageState extends State<LibraryPage> {
                               child: Column(children: [
                                 if (_selectedGameId == game.id) ...[
                                   Container(
-                                    color: Colors.black.withOpacity(0.3),
+                                    color: Colors.black.withValues(alpha: 0.3),
                                     alignment: Alignment.topRight,
                                     child: IconButton(
                                       icon: const Icon(Icons.cancel_outlined),

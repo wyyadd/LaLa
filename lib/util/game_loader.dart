@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vdf/vdf.dart';
 
+import '../l10n/app_localizations.dart';
 import 'dto.dart';
 import 'game_launcher.dart';
 import 'server.dart';
