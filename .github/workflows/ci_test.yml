@@ -38,7 +38,7 @@ jobs:
           path: build\LaLa_Setup.exe
 
   build_linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
       - uses: kuhnroyal/flutter-fvm-config-action/config@v3
@@ -74,7 +74,7 @@ jobs:
           path: build/LaLa_amd64.deb
 
       - name: Build AppImage using AppImage-Builder
-        uses: docker://appimagecrafters/appimage-builder:latest
+        uses: docker://appimagecrafters/appimage-builder:1.1.0
         with:
           entrypoint: appimage-builder
           args: --recipe dist/AppImageBuilder.yml --skip-test
@@ -86,7 +86,7 @@ jobs:
 
   build_flatpak:
     needs: build_linux
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-24.08
       options: --privileged

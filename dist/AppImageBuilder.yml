@@ -1,6 +1,8 @@
 # appimage-builder recipe see https://appimage-builder.readthedocs.io for details
 version: 1
 script:
+  # Ensure that the mksquashfs tool is installed (workaround for the AppImageCrafters/build-appimage GHA)
+  - which mksquashfs || apt-get install -y squashfs-tools
   - rm -rf AppDir || true
   - cp -r build/linux/x64/release/bundle AppDir
   - mkdir -p AppDir/usr/share/icons/hicolor/64x64/apps/
@@ -54,3 +56,4 @@ AppDir:
 AppImage:
   arch: x86_64
   update-information: guess
+  sign-key: None
