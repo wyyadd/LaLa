@@ -91,11 +91,7 @@ abstract class AppLocalizations {
   ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('de'),
-    Locale('en'),
-    Locale('zh')
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('de'), Locale('en'), Locale('zh')];
 
   /// No description provided for @title.
   ///
@@ -292,7 +288,7 @@ abstract class AppLocalizations {
   /// No description provided for @steamPathNotFound.
   ///
   /// In en, this message translates to:
-  /// **'Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: {steamPath}\n\nDefault Path: {defaultPath}'**
+  /// **'steamapps folder under Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: {steamPath}\n\nDefault Path: {defaultPath}'**
   String steamPathNotFound(Object defaultPath, Object steamPath);
 
   /// No description provided for @gamePathNotFound.
@@ -336,6 +332,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Library path not found.\n\nCurrent Path: {libraryPath}'**
   String libraryPathNotFound(Object libraryPath);
+
+  /// No description provided for @setGameSteamPath.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Steam Path for Game'**
+  String get setGameSteamPath;
+
+  /// No description provided for @gameSteamPathSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Steam path set successfully for this game'**
+  String get gameSteamPathSet;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
@@ -354,19 +362,18 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'de': return AppLocalizationsDe();
-    case 'en': return AppLocalizationsEn();
-    case 'zh': return AppLocalizationsZh();
+    case 'de':
+      return AppLocalizationsDe();
+    case 'en':
+      return AppLocalizationsEn();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
-  throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-    'an issue with the localizations generation tool. Please file an issue '
-    'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
-  );
+  throw FlutterError('AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+      'an issue with the localizations generation tool. Please file an issue '
+      'on GitHub with a reproducible sample app and the gen-l10n configuration '
+      'that was used.');
 }

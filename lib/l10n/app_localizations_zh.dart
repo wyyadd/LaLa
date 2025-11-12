@@ -112,7 +112,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String steamPathNotFound(Object defaultPath, Object steamPath) {
-    return '未找到Steam路径。\n\n您可以在设置中指定路径。\n\n当前路径为: $steamPath\n\n默认路径为: $defaultPath';
+    return '未找到Steam路径下的steamapps文件夹。\n\n您可以在设置中指定路径。\n\n当前路径为: $steamPath\n\n默认路径为: $defaultPath';
   }
 
   @override
@@ -139,4 +139,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String libraryPathNotFound(Object libraryPath) {
     return '未找到游戏库路径。\n\n当前路径: $libraryPath';
   }
+
+  @override
+  String get setGameSteamPath => '设置游戏Steam路径';
+
+  @override
+  String get gameSteamPathSet => '游戏Steam路径设置成功';
 }

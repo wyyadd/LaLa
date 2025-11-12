@@ -7,9 +7,10 @@ import 'game_loader.dart';
 
 String customSteamPath = "";
 
-Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
+Future<void> launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer,
+    {String? gameCustomSteamPath}) async {
   try {
-    await _launchGame(context, trainerPath, appId, stopCircleIndicator, isCustomTrainer);
+    await _launchGame(context, trainerPath, appId, stopCircleIndicator, isCustomTrainer, gameCustomSteamPath: gameCustomSteamPath);
   } catch (e) {
     if (context.mounted) {
       showDialog<void>(
@@ -35,14 +36,15 @@ Future<void> launchGame(BuildContext context, String trainerPath, int appId, Voi
   }
 }
 
-Future<void> _launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer) async {
+Future<void> _launchGame(BuildContext context, String trainerPath, int appId, VoidCallback stopCircleIndicator, bool isCustomTrainer,
+    {String? gameCustomSteamPath}) async {
   if (!await File(trainerPath).exists()) {
     if (!context.mounted) return;
     throw Exception(AppLocalizations.of(context)!.trainerPathNotFound(trainerPath));
   }
   if (Platform.isLinux) {
     if (!context.mounted) return;
-    String steamPath = await getSteamPath(context, appId);
+    String steamPath = await getSteamPath(context, appId, gameCustomSteamPath: gameCustomSteamPath);
     String gamePath = '$steamPath/steamapps/compatdata/$appId';
     if (isCustomTrainer || !await dirExist(gamePath)) {
       int? nonSteamGameId = _getAppIdFromPS();

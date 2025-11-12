@@ -6,9 +6,8 @@
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
     <img src="https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white">
   </div>
-    <div>
+  <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
-    <img src="https://dcbadge.vercel.app/api/server/5vpz2V3wB9?style=flat-square&compact=true">
   </div>
   Ein kostenloser und plattformübergreifender Trainer-Launcher zur Verbesserung Ihres Spielerlebnisses🤗.
 </div>
@@ -25,11 +24,6 @@
 * Linux
 * Steam Deck
 * macOS (Coming Soon)
-
-## 💬 Discord
-Bei Fragen einfach vorbei schauen🤗 (English).
-
-[![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ Installation
 Sie können vorgefertigte Binärdateien direkt von [**GitHub releases**](https://github.com/wyyadd/LaLa/releases).
@@ -100,7 +94,6 @@ Es ist nach meiner Liebe zum Film „La La Land“ benannt. Ich wünsche Ihnen v
 ## ☕ Unterstützung
 Server sind nicht kostenlos und die Ausführung/Wartung dieses Projekts ist auch nicht kostenlos😢.
 Wenn Sie mich unterstützen möchten, können Sie [**mir einen Kaffee spendieren**](https://ko-fi.com/LaLaLauncher).
-Sie können auch meine KI-App ausprobieren: [**AironHeart**](https://www.aironheart.com/).
 <p align="center">
 	<img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona.svg" height="200" width="200" alt="Mona logo"/>
 </p>

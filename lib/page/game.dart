@@ -81,7 +81,13 @@ class _GamePageState extends State<GamePage> {
                                                   widget.updateLibraryGames([game], false, true);
                                                   navGameKey.currentState!.push(
                                                     CustomPageRoute(
-                                                      child: DetailPage(game: game as OnlineGame, runTrainer: true),
+                                                      child: DetailPage(
+                                                        game: game as OnlineGame,
+                                                        runTrainer: true,
+                                                        onGameUpdated: () {
+                                                          widget.updateLibraryGames([game], false, false);
+                                                        },
+                                                      ),
                                                     ),
                                                   );
                                                 },

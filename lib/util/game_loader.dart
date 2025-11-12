@@ -38,9 +38,10 @@ Future<List<Game>> getLocalGames(BuildContext context) async {
   return games;
 }
 
-Future<String> getSteamPath(BuildContext context, int appId) async {
+Future<String> getSteamPath(BuildContext context, int appId, {String? gameCustomSteamPath}) async {
   String defaultPath = "${Platform.environment['HOME']!}/.local/share/Steam";
-  String steamPath = customSteamPath.isEmpty ? defaultPath : customSteamPath;
+  // Use game-specific path if available, otherwise fall back to global custom path
+  String steamPath = gameCustomSteamPath?.isNotEmpty == true ? gameCustomSteamPath! : (customSteamPath.isEmpty ? defaultPath : customSteamPath);
   if (!await dirExist('$steamPath/steamapps')) {
     if (!context.mounted) return "";
     throw Exception(AppLocalizations.of(context)!.steamPathNotFound(defaultPath, steamPath));

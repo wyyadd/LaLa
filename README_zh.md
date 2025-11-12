@@ -6,9 +6,8 @@
     <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
     <img src="https://img.shields.io/badge/steam-%23000000.svg?style=for-the-badge&logo=steam&logoColor=white">
   </div>
-    <div>
+  <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
-    <img src="https://dcbadge.vercel.app/api/server/5vpz2V3wB9?style=flat-square&compact=true">
   </div>
   免费、开源、跨平台
 </div>
@@ -25,11 +24,6 @@
 * Linux
 * Steam Deck
 * macOS (Coming Soon)
-
-## 💬 Discord
-交流与获取帮助🤗.
-
-[![](https://dcbadge.vercel.app/api/server/5vpz2V3wB9?compact=true)](https://discord.gg/5vpz2V3wB9)
 
 ## ⚙️ 安装
 你可以直接从[**GitHub releases**](https://github.com/wyyadd/LaLa/releases)下载安装包。
@@ -101,7 +95,6 @@ LaLa使用的大多数修改器都来自于[**风灵月影**](https://flingtrain
 ## ☕ 支持我
 服务器并不是免费的，运行/维护此项目也不是免费的😢。  
 如果你想支持我，你可以[**电我牛牛**](https://afdian.net/a/LaLaLauncher)。  
-你也可以尝试我的AI应用: [**AironHeart**](https://www.aironheart.com/)。  
 <p align="center">
 	<img src="https://github.githubassets.com/images/modules/site/sponsors/logo-mona.svg" height="200" width="200" alt="Mona logo"/>
 </p>

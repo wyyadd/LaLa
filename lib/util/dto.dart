@@ -41,6 +41,7 @@ class OnlineGame extends Game {
   String coverImageUrl;
   String? selectedVersion;
   List<Trainer> trainers;
+  String? customSteamPath;
 
   OnlineGame({
     required super.name,
@@ -50,6 +51,7 @@ class OnlineGame extends Game {
     required this.coverImageUrl,
     this.selectedVersion,
     required this.trainers,
+    this.customSteamPath,
   });
 
   factory OnlineGame.fromJson(Map<String, dynamic> json) {
@@ -67,6 +69,7 @@ class OnlineGame extends Game {
       coverImageUrl: json['cover_image_url'] as String,
       selectedVersion: json['selected_version'] as String?,
       trainers: trainers,
+      customSteamPath: json['custom_steam_path'] as String?,
     );
   }
 
@@ -85,6 +88,7 @@ class OnlineGame extends Game {
       'cover_image_url': coverImageUrl,
       'selected_version': selectedVersion,
       'trainers': trainerList,
+      'custom_steam_path': customSteamPath,
     };
   }
 }

@@ -112,7 +112,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String steamPathNotFound(Object defaultPath, Object steamPath) {
-    return 'Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: $steamPath\n\nDefault Path: $defaultPath';
+    return 'steamapps folder under Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: $steamPath\n\nDefault Path: $defaultPath';
   }
 
   @override
@@ -139,4 +139,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String libraryPathNotFound(Object libraryPath) {
     return 'Library path not found.\n\nCurrent Path: $libraryPath';
   }
+
+  @override
+  String get setGameSteamPath => 'Set Steam Path for Game';
+
+  @override
+  String get gameSteamPathSet => 'Steam path set successfully for this game';
 }

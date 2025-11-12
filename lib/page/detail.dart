@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -8,12 +9,14 @@ import '../util/game_launcher.dart';
 import '../util/language.dart';
 import '../util/server.dart';
 import '../util/storage.dart';
+import '../util/widget.dart';
 
 class DetailPage extends StatefulWidget {
   final OnlineGame game;
   final bool? runTrainer;
+  final VoidCallback? onGameUpdated;
 
-  const DetailPage({super.key, required this.game, this.runTrainer});
+  const DetailPage({super.key, required this.game, this.runTrainer, this.onGameUpdated});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -67,7 +70,7 @@ class _DetailPageState extends State<DetailPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (widget.game.specialNotes.isNotEmpty) const SizedBox(width: 40),
+                  SizedBox(width: widget.game.specialNotes.isNotEmpty ? 90 : 40),
                   Flexible(
                     child: Text(
                       getGameName(widget.game.name, widget.game.nameZh),
@@ -76,16 +79,41 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                   if (widget.game.specialNotes.isNotEmpty)
-                    IconButton(
-                      onPressed: () {
-                        launchUrl(Uri.parse(widget.game.specialNotes));
-                      },
-                      tooltip: AppLocalizations.of(context)!.specialNotes,
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      icon: const Icon(Icons.error_outline, color: Colors.orange, size: 24),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: IconButton(
+                        onPressed: () {
+                          launchUrl(Uri.parse(widget.game.specialNotes));
+                        },
+                        tooltip: AppLocalizations.of(context)!.specialNotes,
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        icon: const Icon(Icons.error_outline, color: Colors.orange, size: 24),
+                      ),
                     ),
+                  IconButton(
+                    icon: const Icon(Icons.settings, color: Colors.grey, size: 24),
+                    tooltip: AppLocalizations.of(context)!.setGameSteamPath,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    onPressed: () {
+                      FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                        if (selectedDirectory != null) {
+                          widget.game.customSteamPath = selectedDirectory;
+                          if (widget.onGameUpdated != null) {
+                            widget.onGameUpdated!();
+                          }
+                          if (!context.mounted) return;
+                          showSnakeBar(
+                            context: context,
+                            message: AppLocalizations.of(context)!.gameSteamPathSet,
+                          );
+                        }
+                      });
+                    },
+                  ),
                 ],
               ),
             ),
@@ -145,13 +173,20 @@ class _DetailPageState extends State<DetailPage> {
       index = 0;
     }
     await cacheManager.getSingleFile(widget.game.trainers[index].trainerUrl, headers: cacheHeader).then((file) async {
-      await launchGame(context, file.path, widget.game.appId, () {
-        if (showCircularIndicator) {
-          setState(() {
-            showCircularIndicator = false;
-          });
-        }
-      }, false);
+      await launchGame(
+        context,
+        file.path,
+        widget.game.appId,
+        () {
+          if (showCircularIndicator) {
+            setState(() {
+              showCircularIndicator = false;
+            });
+          }
+        },
+        false,
+        gameCustomSteamPath: widget.game.customSteamPath,
+      );
     });
   }
 }
