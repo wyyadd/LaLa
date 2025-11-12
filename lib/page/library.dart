@@ -57,7 +57,12 @@ class _LibraryPageState extends State<LibraryPage> {
                                 widget.updateBackButton();
                                 await navLibraryKey.currentState!.push(
                                   CustomPageRoute(
-                                    child: DetailPage(game: game),
+                                    child: DetailPage(
+                                      game: game,
+                                      onGameUpdated: () {
+                                        localStorage.writeGameList(widget.libraryGames, libraryFileName);
+                                      },
+                                    ),
                                   ),
                                 );
                               } else {
@@ -126,7 +131,13 @@ class _LibraryPageState extends State<LibraryPage> {
                                           widget.updateBackButton();
                                           navLibraryKey.currentState!.push(
                                             CustomPageRoute(
-                                              child: DetailPage(game: game, runTrainer: true),
+                                              child: DetailPage(
+                                                game: game,
+                                                runTrainer: true,
+                                                onGameUpdated: () {
+                                                  localStorage.writeGameList(widget.libraryGames, libraryFileName);
+                                                },
+                                              ),
                                             ),
                                           );
                                         } else {

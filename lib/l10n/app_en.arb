@@ -31,12 +31,14 @@
   "downloadLink": "Download Link:",
   "protonPathNotFound": "Proton path not found.\n\nPlease ensure Proton is installed and the game uses Proton.\n\nCurrent Path: {protonPath}",
   "trainerPathNotFound": "Trainer path not found.\n\nCurrent Path: {trainerPath}",
-  "steamPathNotFound": "Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: {steamPath}\n\nDefault Path: {defaultPath}",
+  "steamPathNotFound": "steamapps folder under Steam path not found.\n\nYou can specify the path in the settings.\n\nCurrent Path: {steamPath}\n\nDefault Path: {defaultPath}",
   "gamePathNotFound": "Game path not found. Please ensure the game is installed.\n\nFor non-Steam games or custom trainers, make sure the game is running.\n\nCurrent Path: {gamePath}",
   "customTrainerGamePathNotFound": "Game not found. \n\nFor non-Steam games or custom trainers, make sure the game is running.",
   "launchFail": "Launch failed",
   "loadGames": "Load Games",
   "load": "load",
   "gameLoaded": "Games loaded successfully",
-  "libraryPathNotFound": "Library path not found.\n\nCurrent Path: {libraryPath}"
+  "libraryPathNotFound": "Library path not found.\n\nCurrent Path: {libraryPath}",
+  "setGameSteamPath": "Set Steam Path for Game",
+  "gameSteamPathSet": "Steam path set successfully for this game"
 }

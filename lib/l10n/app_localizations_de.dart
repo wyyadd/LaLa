@@ -24,12 +24,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String get launch => 'Starte';
 
   @override
-  String get notFound =>
-      'Ups, keine Ergebnisse gefunden. Versuche es mit anderen Schlüsselwörtern!';
+  String get notFound => 'Ups, keine Ergebnisse gefunden. Versuche es mit anderen Schlüsselwörtern!';
 
   @override
-  String get libraryEmpty =>
-      'Die Spielebibliothek ist leer.\nSuche und füge deine Favoriten hinzu!';
+  String get libraryEmpty => 'Die Spielebibliothek ist leer.\nSuche und füge deine Favoriten hinzu!';
 
   @override
   String get addTrainers => 'Trainer hinzufügen';
@@ -114,7 +112,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String steamPathNotFound(Object defaultPath, Object steamPath) {
-    return 'Steam Pfad nicht gefunden.\n\nDu kannst den Pfad in den Einstellungen angeben.\n\nAktueller Pfad: $steamPath\n\nStandardpfad: $defaultPath';
+    return 'steamapps Ordner unter Steam-Pfad nicht gefunden.\n\nDu kannst den Pfad in den Einstellungen angeben.\n\nAktueller Pfad: $steamPath\n\nStandardpfad: $defaultPath';
   }
 
   @override
@@ -142,4 +140,10 @@ class AppLocalizationsDe extends AppLocalizations {
   String libraryPathNotFound(Object libraryPath) {
     return 'Bibliothekspfad nicht gefunden.\n\nAktueller Pfad: $libraryPath';
   }
+
+  @override
+  String get setGameSteamPath => 'Steam-Pfad für Spiel festlegen';
+
+  @override
+  String get gameSteamPathSet => 'Steam-Pfad für dieses Spiel erfolgreich festgelegt';
 }
