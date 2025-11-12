@@ -121,7 +121,8 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get customTrainerGamePathNotFound => '游戏未找到。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。';
+  String get customTrainerGamePathNotFound =>
+      '游戏未找到。\n\n对于非Steam游戏或者自定义修改器，请确保游戏已启动。';
 
   @override
   String get launchFail => '启动失败';

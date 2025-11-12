@@ -22,7 +22,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  static setLocal(BuildContext context, String local) {
+  static void setLocal(BuildContext context, String local) {
     context.findAncestorStateOfType<_MyAppState>()?._setLocale(local);
   }
 

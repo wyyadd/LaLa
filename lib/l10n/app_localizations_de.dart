@@ -24,10 +24,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get launch => 'Starte';
 
   @override
-  String get notFound => 'Ups, keine Ergebnisse gefunden. Versuche es mit anderen Schlüsselwörtern!';
+  String get notFound =>
+      'Ups, keine Ergebnisse gefunden. Versuche es mit anderen Schlüsselwörtern!';
 
   @override
-  String get libraryEmpty => 'Die Spielebibliothek ist leer.\nSuche und füge deine Favoriten hinzu!';
+  String get libraryEmpty =>
+      'Die Spielebibliothek ist leer.\nSuche und füge deine Favoriten hinzu!';
 
   @override
   String get addTrainers => 'Trainer hinzufügen';
@@ -121,7 +123,8 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get customTrainerGamePathNotFound => 'Spiel nicht gefunden. \n\nStelle bei Nicht-Steam Spielen oder benutzerdefinierten Trainern sicher, dass das Spiel läuft.';
+  String get customTrainerGamePathNotFound =>
+      'Spiel nicht gefunden. \n\nStelle bei Nicht-Steam Spielen oder benutzerdefinierten Trainern sicher, dass das Spiel läuft.';
 
   @override
   String get launchFail => 'Start fehlgeschlagen';

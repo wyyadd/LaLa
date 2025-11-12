@@ -27,7 +27,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notFound => 'Oops, no results found. Try different keywords!';
 
   @override
-  String get libraryEmpty => 'The game library is empty.\nSearch and add your favorites!';
+  String get libraryEmpty =>
+      'The game library is empty.\nSearch and add your favorites!';
 
   @override
   String get addTrainers => 'Add Trainers';
@@ -121,7 +122,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get customTrainerGamePathNotFound => 'Game not found. \n\nFor non-Steam games or custom trainers, make sure the game is running.';
+  String get customTrainerGamePathNotFound =>
+      'Game not found. \n\nFor non-Steam games or custom trainers, make sure the game is running.';
 
   @override
   String get launchFail => 'Launch failed';
