@@ -95,7 +95,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                         onPressed: trainerPath == null
                             ? () async {
                                 FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ["exe", "EXE"]);
+                                    await FilePicker.pickFiles(type: FileType.custom, allowedExtensions: ["exe", "EXE"]);
                                 if (result != null) {
                                   setState(() {
                                     trainerPath = result.files.single.path;
@@ -123,7 +123,7 @@ class _CustomAddGameState extends State<CustomAddGame> {
                         ),
                         onPressed: coverImagePath == null
                             ? () async {
-                                FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.image);
+                                FilePickerResult? result = await FilePicker.pickFiles(type: FileType.image);
                                 if (result != null) {
                                   setState(() {
                                     coverImagePath = result.files.single.path;

@@ -99,7 +99,7 @@ class _DetailPageState extends State<DetailPage> {
                     highlightColor: Colors.transparent,
                     hoverColor: Colors.transparent,
                     onPressed: () {
-                      FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                      FilePicker.getDirectoryPath().then((selectedDirectory) {
                         if (selectedDirectory != null) {
                           widget.game.customSteamPath = selectedDirectory;
                           if (widget.onGameUpdated != null) {

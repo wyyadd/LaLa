@@ -140,9 +140,9 @@ Future<bool> dirExist(String path) async {
 Future<void> killAllTrainers() async {
   if (Platform.isLinux) {
     if (_inSandbox()) {
-      Process.runSync('flatpak-spawn', ['--host', 'pkill', '-f', 'TrainerCacheData.*x-ms-dos-executable']);
+      Process.runSync('flatpak-spawn', ['--host', 'pkill', '-f', r'TrainerCacheData.*\.exe$']);
     } else {
-      Process.runSync('pkill', ['-f', 'TrainerCacheData.*x-ms-dos-executable']);
+      Process.runSync('pkill', ['-f', r'TrainerCacheData.*\.exe$']);
     }
   }
 }

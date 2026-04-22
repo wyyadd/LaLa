@@ -9,7 +9,7 @@
   <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
   </div>
-  Ein kostenloser und plattformübergreifender Trainer-Launcher zur Verbesserung Ihres Spielerlebnisses🤗.
+  Ein kostenloser, plattformübergreifender Launcher zum einfachen Entdecken, Verwalten und Ausführen von Spiele-Trainern🤗.
 </div>
 
 # 👀 Screenshots
@@ -67,6 +67,22 @@ Für Benutzer, die [Flatpak Steam](https://flathub.org/apps/com.valvesoftware.St
 - Die AppImage LaLa als nicht Steam Spiel hinzufügen
 - ```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run``` als LaLas Startoption verwenden.
 - Öffnen Sie LaLa über Steam.
+
+## 📌 Häufige Probleme
+### Probleme beim Einstellen des Steam-Pfads unter Linux
+LaLa verwendet diesen Standardpfad: `~/.local/share/Steam`  
+Wenn es nicht funktioniert, müssen Sie es möglicherweise manuell einstellen. Der Pfad muss den Ordner `steamapps` enthalten, damit LaLa Ihre Spiele finden kann.
+#### Beispielpfade
+- `~/.local/share/Steam`
+- `~/.steam/steam`
+- Flatpak:
+  `~/.var/app/com.valvesoftware.Steam/.local/share/Steam`
+
+### Trainer erkennt Spiele nicht
+Wenn Trainer Ihr Spiel nicht erkennen können:
+1. [Stellen Sie sicher, dass das Spiel Proton verwendet.](docs/enable_proton.md)
+2. Starten Sie zuerst das Spiel und dann den Trainer.
+3. Wenn es immer noch nicht funktioniert, versuchen Sie, auf eine andere Trainerversion umzusteigen.
 
 ## 🙋 FAQ
 ### Während der Installation gibt mein Betriebssystem eine Sicherheitswarnung aus.
