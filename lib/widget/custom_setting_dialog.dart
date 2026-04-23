@@ -120,7 +120,7 @@ class _CustomSettingDialogState extends State<CustomSettingDialog> {
               ),
               child: Text(AppLocalizations.of(context)!.set),
               onPressed: () {
-                FilePicker.platform.getDirectoryPath().then((selectedDirectory) {
+                FilePicker.getDirectoryPath().then((selectedDirectory) {
                   debugPrint('$selectedDirectory');
                   if (selectedDirectory != null) {
                     customSteamPath = selectedDirectory;

@@ -9,7 +9,7 @@
   <div>
     <img src="https://img.shields.io/badge/License-AGPL_v3-blue.svg">
   </div>
-  免费、开源、跨平台
+  一个免费、跨平台的启动器，让你轻松发现、管理和运行游戏修改器🤗。
 </div>
 
 # 👀 截图
@@ -67,6 +67,22 @@ LaLa启动器依赖[**Proton**](https://github.com/ValveSoftware/Proton)来运�
 - 将AppImage LaLa添加为非Steam游戏
 - 使用```IN_FLATPAK_STEAM=1 %command% --appimage-extract-and-run```作为LaLa的启动选项
 - 从Steam启动LaLa
+
+## 📌 常见问题
+### Linux 下设置 Steam 路径的问题
+LaLa 使用默认路径：`~/.local/share/Steam`  
+如果不起作用，您可能需要手动设置。该路径必须包含 `steamapps` 文件夹，以便 LaLa 能够找到您的游戏。
+#### 示例路径
+- `~/.local/share/Steam`
+- `~/.steam/steam`
+- Flatpak:
+  `~/.var/app/com.valvesoftware.Steam/.local/share/Steam`
+
+### 修改器未检测到游戏
+如果修改器无法检测到您的游戏：
+1. [确保游戏使用 Proton。](docs/enable_proton.md)
+2. 先启动游戏，然后再启动修改器。
+3. 如果仍然不起作用，请尝试切换到不同的修改器版本。
 
 ## 🙋 常见问题
 ### 在安装过程中，我的操作系统发出了安全警告。
